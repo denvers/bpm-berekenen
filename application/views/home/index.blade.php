@@ -43,7 +43,7 @@
                 <br>
 
                 <?= Form::label('datum_aangifte', 'Datum aangifte'); ?>
-                <?= Form::text('datum_aangifte', Input::get('datum_aangifte')); ?> <em>01-01-1970</em>
+                <?= Form::text('datum_aangifte', date('d-m-Y') /*Input::get('datum_aangifte')*/); ?> <em>01-01-1970</em>
                 <br>
 
                 <?= Form::label('co2_uitstoot', 'CO2-uitstoot'); ?>

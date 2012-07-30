@@ -261,7 +261,9 @@ class BPM_Berekening
             return $this->berekenBpmOverCO2UitstootBenzine($co2_uitstoot);
         }
         else {
-            throw new \Exception("#1: Brandstof: ".$brandstof." is onbekend.");
+            $ex = new \Exception("#1: Brandstof: ".$brandstof." is onbekend.");
+            \Laravel\Log::exception($ex);
+            throw $ex;
         }
     }
 
@@ -298,7 +300,7 @@ class BPM_Berekening
 
         $bpm = (($co2_uitstoot - $toegepaste_rekenwaarde['I']) * $toegepaste_rekenwaarde['IV']) + $toegepaste_rekenwaarde['III'];
 
-        $this->output("Te betalen bpm over CO2 uitstoot: ((" . $co2_uitstoot . " - " . $toegepaste_rekenwaarde['I'] . ") x EUR " . $toegepaste_rekenwaarde['IV'] . ") + EUR " . $toegepaste_rekenwaarde['III'] . " = EUR " . $bpm . "<br>");
+        $this->output("Te betalen bpm over CO2 uitstoot (diesel): ((" . $co2_uitstoot . " - " . $toegepaste_rekenwaarde['I'] . ") x EUR " . $toegepaste_rekenwaarde['IV'] . ") + EUR " . $toegepaste_rekenwaarde['III'] . " = EUR " . $bpm . "<br>");
 
         return $bpm;
     }
@@ -335,7 +337,7 @@ class BPM_Berekening
 
         $bpm = (($co2_uitstoot - $toegepaste_rekenwaarde['I']) * $toegepaste_rekenwaarde['IV']) + $toegepaste_rekenwaarde['III'];
 
-        $this->output("Te betalen bpm over CO2 uitstoot: ((" . $co2_uitstoot . " - " . $toegepaste_rekenwaarde['I'] . ") x EUR " . $toegepaste_rekenwaarde['IV'] . ") + EUR " . $toegepaste_rekenwaarde['III'] . " = EUR " . $bpm . "<br>");
+        $this->output("Te betalen bpm over CO2 uitstoot (benzine): ((" . $co2_uitstoot . " - " . $toegepaste_rekenwaarde['I'] . ") x EUR " . $toegepaste_rekenwaarde['IV'] . ") + EUR " . $toegepaste_rekenwaarde['III'] . " = EUR " . $bpm . "<br>");
 
         return $bpm;
     }
@@ -375,7 +377,7 @@ class BPM_Berekening
 
         $bpm = ($netto_catalogusprijs * $bpm_tarief / 100);
 
-        $this->output("bpm over catalogusprijs: (" . $netto_catalogusprijs . " x " . $bpm_tarief . "/100)");
+        $this->output("Bpm over catalogusprijs (diesel): (" . $netto_catalogusprijs . " x " . $bpm_tarief . "/100)");
 
         if ($co2_uitstoot > $vermeerderingsbedrag_drempel) {
             $bpm += round(round($co2_uitstoot - $vermeerderingsbedrag_drempel) * $dieseltoeslag);
@@ -404,7 +406,7 @@ class BPM_Berekening
 
         $bpm = floor( ($netto_catalogusprijs * $bpm_tarief / 100) - $brandstofkorting );
 
-        $this->output("bpm over catalogusprijs: (" . $netto_catalogusprijs . " x " . $bpm_tarief . "/100) - EUR ".$brandstofkorting." = EUR ".$bpm."<br>");
+        $this->output("Bpm over catalogusprijs (geen diesel): (" . $netto_catalogusprijs . " x " . $bpm_tarief . "/100) - EUR ".$brandstofkorting." = EUR ".$bpm."<br>");
 
         return $bpm;
     }
@@ -420,7 +422,6 @@ class BPM_Berekening
 
     private function output($msg)
     {
-        if ( $this->debug === true )
-            echo $msg;
+        \Laravel\Log::info($msg);
     }
 }
