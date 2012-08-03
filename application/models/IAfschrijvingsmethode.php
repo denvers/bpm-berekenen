@@ -17,8 +17,8 @@ interface IAfschrijvingsmethode
 
     /**
      * @abstract
-     * @param \DateTime $datum_aangifte
+     * @param \DateTime $datum_aangifte = null
      * @return int
      */
-    public function berekenAfschrijvingspercentage($datum_aangifte);
+    public function berekenAfschrijvingspercentage($datum_aangifte = null);
 }

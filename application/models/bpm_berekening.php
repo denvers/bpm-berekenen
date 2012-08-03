@@ -3,8 +3,17 @@ namespace BPMBerekening\models;
 
 require_once( dirname(__FILE__) . "/../models/forfaitaire_tabel.php" );
 require_once( dirname(__FILE__) . "/../models/koerslijst.php" );
+
 require_once( dirname(__FILE__) . "/../models/personenauto_diesel.php" );
 require_once( dirname(__FILE__) . "/../models/personenauto_geen_diesel.php" );
+
+require_once( dirname(__FILE__) . "/../models/bestelauto_diesel.php" );
+require_once( dirname(__FILE__) . "/../models/bestelauto_geen_diesel.php" );
+
+require_once( dirname(__FILE__) . "/../models/kampeerauto_diesel.php" );
+require_once( dirname(__FILE__) . "/../models/kampeerauto_geen_diesel.php" );
+
+require_once( dirname(__FILE__) . "/../models/motorfiets.php" );
 
 /**
  * User: dsessink
@@ -126,7 +135,28 @@ class BPM_Berekening
      */
     public function setSoortAuto($soort_auto)
     {
-        $this->soort_auto = $soort_auto;
+        switch($soort_auto)
+        {
+            case "personenauto":
+                $this->soort_auto = $soort_auto;
+                break;
+
+            case "kampeerauto":
+                $this->soort_auto = $soort_auto;
+                break;
+
+            case "bestelauto":
+                $this->soort_auto = $soort_auto;
+                break;
+
+            case "motorfiets":
+                $this->soort_auto = $soort_auto;
+                break;
+
+            default:
+                    throw new \Exception("Onbekend soort auto gedetecteerd.");
+                break;
+        }
     }
 
     /**
@@ -145,19 +175,49 @@ class BPM_Berekening
         return $this->brandstof;
     }
 
-    private function getMotorrijtuig()
+    /**
+     * @return motorrijtuig\Personenauto_Diesel|motorrijtuig\Motorrijtuig
+     * @throws \Exception
+     */
+    public function getMotorrijtuig()
     {
         switch($this->getSoortAuto())
         {
             case "personenauto":
                 if ( $this->brandstof == "diesel" )
                 {
-                    $motorrijtuig = new \BPMBerekening\models\motorrijtuig\Personenauto_Geen_Diesel();
+                    $motorrijtuig = new \BPMBerekening\models\motorrijtuig\Personenauto_Diesel();
                 }
                 else
                 {
-                    $motorrijtuig = new \BPMBerekening\models\motorrijtuig\Personenauto_Diesel();
+                    $motorrijtuig = new \BPMBerekening\models\motorrijtuig\Personenauto_Geen_Diesel();
                 }
+                break;
+
+            case "kampeerauto":
+                if ( $this->brandstof == "diesel" )
+                {
+                    $motorrijtuig = new \BPMBerekening\models\motorrijtuig\Kampeerauto_Diesel();
+                }
+                else
+                {
+                    $motorrijtuig = new \BPMBerekening\models\motorrijtuig\Kampeerauto_Geen_Diesel();
+                }
+                break;
+
+            case "bestelauto":
+                if ( $this->brandstof == "diesel" )
+                {
+                    $motorrijtuig = new \BPMBerekening\models\motorrijtuig\Bestelauto_Diesel();
+                }
+                else
+                {
+                    $motorrijtuig = new \BPMBerekening\models\motorrijtuig\Bestelauto_Geen_Diesel();
+                }
+                break;
+
+            case "motorfiets":
+                $motorrijtuig = new \BPMBerekening\models\motorrijtuig\Motorfiets();
                 break;
 
             default:
@@ -171,9 +231,85 @@ class BPM_Berekening
         $motorrijtuig->setDatumIngebruikname( new \DateTime($this->datum_eerste_ingebruikname) );
         $motorrijtuig->setNettoCatalogusprijs($this->netto_catalogusprijs);
         $motorrijtuig->setSoort($this->soort_auto);
-        $motorrijtuig->setVerkoopprijs($this->inkoopwaarde);
+        $motorrijtuig->setInkoopwaarde($this->inkoopwaarde);
 
         return $motorrijtuig;
+    }
+
+    /**
+     * Dekt requirement 1-6
+     * @param \BPMBerekening\models\motorrijtuig\Motorrijtuig $motorrijtuig
+     * @return bool
+     */
+    private function geenBpmVoorMotorrijtuigOpBasisVanCO2Uitstoot($motorrijtuig)
+    {
+        // Requirement 1:
+        // U betaalt geen bpm voor personenauto’s met een CO2-uitstoot van 0 gram per kilometer.
+
+        // Requirement 2:
+        // U betaalt geen bpm voor bestelauto’s met een CO2-uitstoot van 0 gram per kilometer.
+
+        // Requirement 3:
+        // U betaalt geen bpm voor kampeerauto’s met een CO2-uitstoot van 0 gram per kilometer.
+
+        // Requirement 4:
+        // U betaalt geen bpm voor motoren met een CO2-uitstoot van 0 gram per kilometer.
+
+        $classname = get_class($motorrijtuig);
+
+        if (
+            $motorrijtuig->getCo2Uitstoot() == 0 &&
+            (
+                $classname == 'BPMBerekening\models\motorrijtuig\Personenauto_Diesel' ||
+                $classname == 'BPMBerekening\models\motorrijtuig\Personenauto_Geen_Diesel' ||
+                $classname == 'BPMBerekening\models\motorrijtuig\Bestelauto_Diesel' ||
+                $classname == 'BPMBerekening\models\motorrijtuig\Bestelauto_Geen_Diesel' ||
+                $classname == 'BPMBerekening\models\motorrijtuig\Kampeerauto_Diesel' ||
+                $classname == 'BPMBerekening\models\motorrijtuig\Kampeerauto_Geen_Diesel' ||
+                $classname == 'BPMBerekening\models\motorrijtuig\Motorfiets'
+                )
+            )
+        {
+            return true;
+        }
+
+        // Requirement 5:
+        // U betaalt ook geen bpm voor personenauto’s die op of na 1 januari 2009 voor het eerst in gebruik zijn genomen en uitgerust zijn met een benzinemotor met een CO2-uitstoot van maximaal 102 gram per kilometer
+        if ( $classname == 'BPMBerekening\models\motorrijtuig\Personenauto_Geen_Diesel' )
+        {
+            if ( $motorrijtuig->getCo2Uitstoot() <= 102 )
+            {
+                /**
+                 * @var DateTime
+                 */
+                $datum_eerste_ingebruikname = $motorrijtuig->getDatumEersteIngebruikname();
+
+                if ( $datum_eerste_ingebruikname->format("Ymd") >= 20090101 )
+                {
+                    return true;
+                }
+            }
+        }
+
+        // Requirement 6:
+        // U betaalt ook geen bpm voor personenauto’s die op of na 1 januari 2009 voor het eerst in gebruik zijn genomen en uitgerust zijn met een dieselmotor met een CO2-uitstoot van maximaal 91 gram per kilometer
+        if ( $classname == 'BPMBerekening\models\motorrijtuig\Personenauto_Diesel' )
+        {
+            if ( $motorrijtuig->getCo2Uitstoot() <= 91 )
+            {
+                /**
+                 * @var DateTime
+                 */
+                $datum_eerste_ingebruikname = $motorrijtuig->getDatumEersteIngebruikname();
+
+                if ( $datum_eerste_ingebruikname->format("Ymd") >= 20090101 )
+                {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 
     /**
@@ -183,6 +319,27 @@ class BPM_Berekening
     {
         $motorrijtuig = $this->getMotorrijtuig();
         $bpmberekening = array();
+
+        if ( true === $this->geenBpmVoorMotorrijtuigOpBasisVanCO2Uitstoot($motorrijtuig) )
+        {
+            $bpmberekening['koerslijst'] = array(
+                'afschrijvingspercentage' => "n.v.t.",
+                'bpm_over_c02_uitstoot' => 0,
+                'bpm_over_catalogusprijs' => 0,
+                'bruto_bpm' => 0,
+                'netto_bpm' => 0,
+            );
+
+            $bpmberekening['forfaitaire_tabel'] = array(
+                'afschrijvingspercentage' => "n.v.t.",
+                'bpm_over_c02_uitstoot' => 0,
+                'bpm_over_catalogusprijs' => 0,
+                'bruto_bpm' => 0,
+                'netto_bpm' => 0,
+            );
+
+            return $bpmberekening;
+        }
 
         // Algemene BPM berekeningen
         $bpm_over_c02 = $this->berekenBpmOverCO2Uitstoot($this->brandstof, $this->co2_uitstoot);
@@ -220,6 +377,7 @@ class BPM_Berekening
         );
 
         // Taxatierapport
+        // TODO
 //        $bpmberekening['taxatierapport'] = array(
 //            'afschrijvingspercentage' => $afschrijvingspercentage,
 //            'bpm_over_c02_uitstoot' => $bpm_over_c02,

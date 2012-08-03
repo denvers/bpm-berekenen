@@ -20,7 +20,7 @@ class Aangifteformulier
     }
 
     /**
-     * FIXME TODO
+     * TODO
      */
     public function get()
     {

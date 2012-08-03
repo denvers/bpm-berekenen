@@ -16,7 +16,7 @@ class Koerslijst implements IAfschrijvingsmethode
     private $motorrijtuig;
 
     /**
-     * @param Motorrijtuig $motorrijtuig
+     * @param \BPMBerekening\models\motorrijtuig\Motorrijtuig $motorrijtuig
      * @return mixed
      */
     public function setMotorrijtuig($motorrijtuig)
@@ -29,19 +29,26 @@ class Koerslijst implements IAfschrijvingsmethode
         $this->motorrijtuig = $motorrijtuig;
     }
 
-    public function berekenAfschrijvingspercentage($datum_aangifte)
+    public function berekenAfschrijvingspercentage($datum_aangifte = null)
     {
         // FIXME waarde volgens de koerslijst ophalen
         // en niet de door de gebruiker ingevoerde inkoopwaarde ;)
         // die inkoopwaarde kan wel weg
-        $inkoopwaarde_volgens_koerslijst = $this->motorrijtuig->getVerkoopprijs();
+        if ( !isset($this->motorrijtuig) )
+        {
+            $ex = new Exception("Geen motorrijtuig object gevonden voor het berekenen van het afschrijvingspercentage.");
+            \Laravel\Log::exception($ex);
+            throw $ex;
+        }
+
+        $inkoopwaarde_volgens_koerslijst = $this->motorrijtuig->getInkoopwaarde();
         $consumentenprijs = $this->motorrijtuig->getConsumentenprijs();
 
         $afschrijving = $this->berekenAfschrijving($consumentenprijs, $inkoopwaarde_volgens_koerslijst);
 
         $percentage = $afschrijving / ($consumentenprijs / 100);
 
-//        $this->output("Afschrijvingspercentage: EUR " . $afschrijving . " / ( EUR " . $consumentenprijs . " / 100 ) = " . $percentage . "%<br>");
+        \Laravel\Log::info("Afschrijvingspercentage: EUR " . $afschrijving . " / ( EUR " . $consumentenprijs . " / 100 ) = " . $percentage . "%<br>");
 
         return $percentage;
     }
@@ -51,14 +58,14 @@ class Koerslijst implements IAfschrijvingsmethode
      * @param $inkoopwaarde
      * @return int
      */
-    private function berekenAfschrijving($consumentenprijs, $inkoopwaarde)
+    public function berekenAfschrijving($consumentenprijs, $inkoopwaarde)
     {
         $afschrijving = $consumentenprijs - $inkoopwaarde;
 
         if ( $afschrijving <= 0 )
             $afschrijving = 0;
 
-//        $this->output("Afschrijving: EUR " . $consumentenprijs . " - EUR " . $inkoopwaarde . " = EUR " . $afschrijving . "<br>");
+        \Laravel\Log::info("Afschrijving: EUR " . $consumentenprijs . " - EUR " . $inkoopwaarde . " = EUR " . $afschrijving . "<br>");
 
         return $afschrijving;
     }

@@ -41,7 +41,7 @@ class Motorrijtuig {
     /**
      * @var int
      */
-    private $verkoopprijs;
+    private $inkoopwaarde;
 
     /**
      * @var int
@@ -87,6 +87,11 @@ class Motorrijtuig {
     public function setCo2Uitstoot($co2_uitstoot)
     {
         $this->co2_uitstoot = $co2_uitstoot;
+    }
+
+    public function getCo2Uitstoot()
+    {
+        return $this->co2_uitstoot;
     }
 
     /**
@@ -138,15 +143,34 @@ class Motorrijtuig {
     }
 
     /**
-     * @param int $verkoopprijs
+     * @param int $inkoopwaarde
      */
-    public function setVerkoopprijs($verkoopprijs)
+    public function setInkoopwaarde($inkoopwaarde)
     {
-        $this->verkoopprijs = $verkoopprijs;
+        $this->inkoopwaarde = $inkoopwaarde;
     }
 
-    public function getVerkoopprijs()
+    /**
+     * @return int
+     */
+    public function getInkoopwaarde()
     {
-        return $this->verkoopprijs;
+        return $this->inkoopwaarde;
+    }
+
+    /**
+     * @param \DateTime $datum_eerste_toelating
+     */
+    public function setDatumEersteToelating($datum_eerste_toelating)
+    {
+        $this->datum_eerste_toelating = $datum_eerste_toelating;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getDatumEersteToelating()
+    {
+        return $this->datum_eerste_toelating;
     }
 }

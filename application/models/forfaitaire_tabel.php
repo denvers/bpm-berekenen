@@ -37,7 +37,7 @@ class Forfaitaire_Tabel implements IAfschrijvingsmethode
      * @param \DateTime $datum_aangifte
      * @return int
      */
-    public function berekenAfschrijvingspercentage($datum_aangifte)
+    public function berekenAfschrijvingspercentage($datum_aangifte = null)
     {
         $datum_eerste_tenaamstelling_nederland = $datum_aangifte; //new \DateTime("08-04-2012"); //new \DateTime("now");
         $datum_eerste_ingebruikname = $this->motorrijtuig->getDatumEersteIngebruikname();

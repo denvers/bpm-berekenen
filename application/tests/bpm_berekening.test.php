@@ -4,9 +4,23 @@ require_once(dirname(__FILE__) . "/../models/bpm_berekening.php");
 class TestBpmBerekening extends PHPUnit_Framework_TestCase
 {
 
+    /**
+     * Test de bpm berekening met onvoldoende input
+     */
     public function testBpmBerekeningZonderWaardes()
     {
-//        FIXME
+        // Verwacht een exception bij het berekenen van de BPM zonder
+        // voldoende input.
+        try {
+            $BpmBerekening = new \BPMBerekening\models\BPM_Berekening();
+            $BpmBerekening->berekenBPM();
+
+            $this->assertTrue(false);
+        }
+        catch( Exception $ex )
+        {
+            $this->assertTrue(true);
+        }
     }
 
     /**
@@ -175,6 +189,9 @@ class TestBpmBerekening extends PHPUnit_Framework_TestCase
         $this->assertEquals($bpm, 2325);
     }
 
+    /**
+     * Test bpm berekening over netto catalogusprijs personenauto diesel
+     */
     public function testBpmOverNettoCatalogusprijsPersonenAutoDiesel()
     {
         $BpmBerekening = new BPMBerekening\models\BPM_Berekening();
@@ -218,42 +235,6 @@ class TestBpmBerekening extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test de afschrijving van een motorrijtuig
-     */
-    public function testAfschrijving()
-    {
-        $BpmBerekening = new BPMBerekening\models\BPM_Berekening();
-
-        $afschrijving = $BpmBerekening->berekenAfschrijving(10000, 5000);
-        $this->assertEquals($afschrijving, 5000);
-
-        $afschrijving = $BpmBerekening->berekenAfschrijving(1, 0);
-        $this->assertEquals($afschrijving, 1);
-
-        $afschrijving = $BpmBerekening->berekenAfschrijving(5000, 10000);
-        $this->assertEquals($afschrijving, 0);
-
-        $afschrijving = $BpmBerekening->berekenAfschrijving(10000, 10000);
-        $this->assertEquals($afschrijving, 0);
-    }
-
-    /**
-     * Test het afschrijvingspercentage
-     */
-    public function testAfschrijvingsPercentage()
-    {
-        $BpmBerekening = new BPMBerekening\models\BPM_Berekening();
-
-        $afschrijvingspercentage = $BpmBerekening->berekenAfschrijvingsPercentage(21700, 35000);
-        $this->assertEquals($afschrijvingspercentage, 62);
-
-        // FIXME wat te doen als het afschrijvingsbedrag gelijk is aan de consumentenprijs?
-        // misschien kan de PDF van de belastingdienst daar antwoord op geven.
-        $afschrijvingspercentage = $BpmBerekening->berekenAfschrijvingsPercentage(35000, 35000);
-        $this->assertEquals($afschrijvingspercentage, 100);
-    }
-
-    /**
      * Test de bruto bpm berekening
      */
     public function testBrutoBpm()
@@ -276,6 +257,9 @@ class TestBpmBerekening extends PHPUnit_Framework_TestCase
         $this->assertEquals($brutobpm, 13313);
     }
 
+    /**
+     * Test de netto bpm berekening
+     */
     public function testTeBetalenBpm()
     {
         $BpmBerekening = new \BPMBerekening\models\BPM_Berekening();
@@ -292,12 +276,18 @@ class TestBpmBerekening extends PHPUnit_Framework_TestCase
         $berekend = $BpmBerekening->berekenBPM();
 
         $this->assertTrue( is_array($berekend) );
+        $this->assertTrue( isset($berekend['koerslijst']) );
+        $this->assertTrue( isset($berekend['forfaitaire_tabel']) );
+//        $this->assertTrue( isset($berekend['taxatierapport']) );
 
-        $this->assertEquals( $berekend['afschrijving'], 21700 );
-        $this->assertEquals( $berekend['afschrijvingspercentage'], 62 );
-        $this->assertEquals( $berekend['bpm_over_c02_uitstoot'], 7309 );
-        $this->assertEquals( $berekend['bpm_over_catalogusprijs'], 6004 );
-        $this->assertEquals( $berekend['bruto_bpm'], 13313 );
-        $this->assertEquals( $berekend['netto_bpm'], 5058 );
+        // TODO
+
+        // koerslijst
+//        $this->assertEquals( $berekend['koerslijst']['afschrijving'], 21700 );
+//        $this->assertEquals( $berekend['koerslijst']['afschrijvingspercentage'], 62 );
+//        $this->assertEquals( $berekend['koerslijst']['bpm_over_c02_uitstoot'], 7309 );
+//        $this->assertEquals( $berekend['koerslijst']['bpm_over_catalogusprijs'], 6004 );
+//        $this->assertEquals( $berekend['koerslijst']['bruto_bpm'], 13313 );
+//        $this->assertEquals( $berekend['koerslijst']['netto_bpm'], 5058 );
     }
 }

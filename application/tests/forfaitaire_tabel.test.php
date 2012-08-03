@@ -17,7 +17,7 @@ class TestForfaitaireTabel extends PHPUnit_Framework_TestCase
     public function testBpmBerekeningZonderWaardes()
     {
         $personenauto = new \BPMBerekening\models\motorrijtuig\Personenauto_Diesel();
-        $personenauto->setDatumEersteToelating( new DateTime("26-04-2011") );
-        $personenauto->setDatumIngebruikname( new DateTime("08-04-2012") );
+        $personenauto->setDatumEersteToelating(new DateTime("26-04-2011"));
+        $personenauto->setDatumIngebruikname(new DateTime("08-04-2012"));
     }
 }
