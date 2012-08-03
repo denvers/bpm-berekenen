@@ -4,7 +4,7 @@ require_once(dirname(__FILE__) . "/../models/bpm_berekening.php");
 /**
  * Deze test class dekt de requirements #1 t/m #10
  */
-class TestRequirements0to10 extends PHPUnit_Framework_TestCase
+class TestRequirements0to6 extends PHPUnit_Framework_TestCase
 {
     /**
      * @requirement 1
