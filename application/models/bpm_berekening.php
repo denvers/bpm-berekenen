@@ -227,7 +227,6 @@ class BPM_Berekening
         $motorrijtuig->setConsumentenprijs($this->consumentenprijs);
         $motorrijtuig->setDatumIngebruikname(new DateTime($this->datum_eerste_ingebruikname));
         $motorrijtuig->setNettoCatalogusprijs($this->netto_catalogusprijs);
-        $motorrijtuig->setSoort($this->soort_auto);
         $motorrijtuig->setInkoopwaarde($this->inkoopwaarde);
 
         return $motorrijtuig;
@@ -308,6 +307,7 @@ class BPM_Berekening
     public function berekenBPM()
     {
         $motorrijtuig = $this->getMotorrijtuig();
+
         $bpmberekening = array();
 
         if (true === $this->geenBpmVoorMotorrijtuigOpBasisVanCO2Uitstoot($motorrijtuig)) {
@@ -334,7 +334,7 @@ class BPM_Berekening
         $bpmberekening['koerslijst'] = $this->berekenBpmVolgensKoerslijst($motorrijtuig);
 
         // Forfaitaire_tabel
-        $bpmberekening['forfaitaire_tabel'] = $this->berekenBpmVolgensForfaitaireTabel($motorrijtuig);
+        $bpmberekening['forfaitaire_tabel'] = $this->berekenBpmVolgensForfaitaireTabel();
 
         // Taxatierapport
         // TODO
@@ -381,10 +381,11 @@ class BPM_Berekening
     }
 
     /**
-     * @param \BPMBerekening\models\motorrijtuig\Motorrijtuig $motorrijtuig
+     * @return array
      */
-    private function berekenBpmVolgensForfaitairetabel($motorrijtuig)
+    public function berekenBpmVolgensForfaitairetabel()
     {
+        $motorrijtuig = $this->getMotorrijtuig();
         $bpm_over_c02 = $this->berekenBpmOverCO2Uitstoot($this->brandstof, $this->co2_uitstoot);
         $bpm_over_catalogusprijs = $this->berekenBpmOverCatalogusprijs($this->brandstof, $this->netto_catalogusprijs, $this->co2_uitstoot);
 
@@ -606,6 +607,12 @@ class BPM_Berekening
         return $bpm;
     }
 
+    /**
+     * @requirement 51: Netto bpm-bedrag is het bruto bpm-bedrag min de korting op basis van de afschrijving van het motorrijtuig
+     * @param $afschrijvingspercentage
+     * @param $bruto_bpm
+     * @return float|int
+     */
     private function berekenNettoBpmBedrag($afschrijvingspercentage, $bruto_bpm)
     {
         $bpm = floor(((100 - $afschrijvingspercentage) / 100) * $bruto_bpm);

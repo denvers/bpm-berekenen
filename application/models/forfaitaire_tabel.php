@@ -1,7 +1,7 @@
 <?php
 namespace BPMBerekening\afschrijvingsmethode;
 
-require_once( dirname(__FILE__) . "/IAfschrijvingsmethode.php" );
+require_once(dirname(__FILE__) . "/IAfschrijvingsmethode.php");
 
 /**
  * User: dsessink
@@ -25,9 +25,8 @@ class Forfaitaire_Tabel implements IAfschrijvingsmethode
      */
     public function setMotorrijtuig($motorrijtuig)
     {
-        if ( !class_basename($motorrijtuig) == "Motorrijtuig" )
-        {
-            throw new Exception("Invalid motorrijtuig given: ".class_basename($motorrijtuig));
+        if (!class_basename($motorrijtuig) == "Motorrijtuig") {
+            throw new Exception("Invalid motorrijtuig given: " . class_basename($motorrijtuig));
         }
 
         $this->motorrijtuig = $motorrijtuig;
@@ -42,6 +41,17 @@ class Forfaitaire_Tabel implements IAfschrijvingsmethode
         $datum_eerste_tenaamstelling_nederland = $datum_aangifte; //new \DateTime("08-04-2012"); //new \DateTime("now");
         $datum_eerste_ingebruikname = $this->motorrijtuig->getDatumEersteIngebruikname();
 
+        // Requirement 44: Voor een bestelauto geldt een afwijkende regeling. Het afschrijvingspercentage is na 5 jaar 100%.
+        if (
+            get_class($this->motorrijtuig) == "BPMBerekening\models\motorrijtuig\Bestelauto_Diesel" ||
+            get_class($this->motorrijtuig) == "BPMBerekening\models\motorrijtuig\Bestelauto_Geen_Diesel"
+        ) {
+            $verschil = $datum_eerste_ingebruikname->diff($datum_eerste_tenaamstelling_nederland);
+            if ($verschil->y >= 5) {
+                return 100;
+            }
+        }
+
         return $this->tabel($datum_eerste_tenaamstelling_nederland, $datum_eerste_ingebruikname);
     }
 
@@ -55,15 +65,49 @@ class Forfaitaire_Tabel implements IAfschrijvingsmethode
      */
     private function tabel($datum_eerste_tenaamstelling_nederland, $datum_eerste_ingebruikname)
     {
-        $interval = $datum_eerste_ingebruikname->diff($datum_eerste_tenaamstelling_nederland);
-        $leeftijd_in_maanden = ($interval->y * 12) + $interval->m;
+        $leeftijd_in_maanden = $this->berekenLeeftijdInMaanden($datum_eerste_ingebruikname, $datum_eerste_tenaamstelling_nederland);
 
         $forfaitwaarden = $this->getForfaitWaarden($leeftijd_in_maanden);
+
+        $interval = $this->berekenInterval($datum_eerste_ingebruikname, $datum_eerste_tenaamstelling_nederland);
 
         $overige_maanden = $this->berekenOverigeMaanden($interval, $forfaitwaarden);
         $afschrijvingspercentage = $forfaitwaarden[2] + ($overige_maanden * $forfaitwaarden[3]);
 
         return $afschrijvingspercentage;
+    }
+
+    /**
+     * @param \DateTime $datum_eerste_ingebruikname
+     * @param \DateTime $datum_eerste_tenaamstelling_nederland
+     * @return int
+     */
+    public function berekenLeeftijdInMaanden($datum_eerste_ingebruikname, $datum_eerste_tenaamstelling_nederland)
+    {
+        $interval = $this->berekenInterval($datum_eerste_ingebruikname, $datum_eerste_tenaamstelling_nederland);
+        $leeftijd_in_maanden = ($interval->y * 12) + $interval->m;
+
+        if ($leeftijd_in_maanden == 0) {
+            // @requirement 42: 31 januari tot en met 28 februari wordt gerekend als 1 maand
+            if ($datum_eerste_tenaamstelling_nederland->format("m") == ($datum_eerste_ingebruikname->format("m") + 1)) {
+                $leeftijd_in_maanden = 1;
+            } // @requirement 43: 31 januari tot en met 1 maart wordt gerekend als 2 maanden
+            elseif ($datum_eerste_tenaamstelling_nederland->format("m") == ($datum_eerste_ingebruikname->format("m") + 2)) {
+                $leeftijd_in_maanden = 2;
+            }
+        }
+
+        return $leeftijd_in_maanden;
+    }
+
+    /**
+     * @param \DateTime $datum_eerste_ingebruikname
+     * @param \DateTime $datum_eerste_tenaamstelling_nederland
+     * @return \DateInterval
+     */
+    public function berekenInterval($datum_eerste_ingebruikname, $datum_eerste_tenaamstelling_nederland)
+    {
+        return $datum_eerste_ingebruikname->diff($datum_eerste_tenaamstelling_nederland);
     }
 
     /**
@@ -92,18 +136,15 @@ class Forfaitaire_Tabel implements IAfschrijvingsmethode
             array(124, 1000000, 92, 0.083),
         );
 
-        foreach( $tabel as $forfait )
-        {
-            if ( $leeftijd_in_maanden >= $forfait[0] && $leeftijd_in_maanden <= $forfait[1] )
-            {
+        foreach ($tabel as $forfait) {
+            if ($leeftijd_in_maanden >= $forfait[0] && $leeftijd_in_maanden <= $forfait[1]) {
                 $forfaitwaarden = $forfait;
                 break;
             }
         }
 
-        if ( is_null($forfaitwaarden) )
-        {
-            throw new Exception("Geen forfaitwaarden gevonden voor leeftijd (in maanden) van: ".$leeftijd_in_maanden);
+        if (is_null($forfaitwaarden)) {
+            throw new Exception("Geen forfaitwaarden gevonden voor leeftijd (in maanden) van: " . $leeftijd_in_maanden);
         }
 
         return $forfaitwaarden;
@@ -118,8 +159,7 @@ class Forfaitaire_Tabel implements IAfschrijvingsmethode
     {
         $leeftijd_in_maanden = ($interval->y * 12) + $interval->m;
         $overige_maanden = $leeftijd_in_maanden - $forfaitwaarden[0];
-        if ( $interval->d > 0 )
-        {
+        if ($interval->d > 0) {
             $overige_maanden += 1; // extra maand omdat er nog dagen van een extra maand zijn. niet precies x maanden dus.
         }
 

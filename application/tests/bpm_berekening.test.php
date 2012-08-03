@@ -16,9 +16,7 @@ class TestBpmBerekening extends PHPUnit_Framework_TestCase
             $BpmBerekening->berekenBPM();
 
             $this->assertTrue(false);
-        }
-        catch( Exception $ex )
-        {
+        } catch (Exception $ex) {
             $this->assertTrue(true);
         }
     }
@@ -273,18 +271,18 @@ class TestBpmBerekening extends PHPUnit_Framework_TestCase
         $BpmBerekening->setCo2Uitstoot(160);
         $BpmBerekening->setConsumentenprijs(35000);
         $BpmBerekening->setNettoCatalogusprijs(21116);
-        $BpmBerekening->setDatum( new DateTime("now") );
+        $BpmBerekening->setDatum(new DateTime("now"));
         $BpmBerekening->setDatumEersteIngebruikname("08-04-2010");
         $BpmBerekening->setInkoopwaarde(13300);
         $BpmBerekening->setEuro6Norm(true);
 
         $berekend = $BpmBerekening->berekenBPM();
 
-        $this->assertTrue( is_array($berekend) );
-        $this->assertTrue( isset($berekend['koerslijst']) );
+        $this->assertTrue(is_array($berekend));
+        $this->assertTrue(isset($berekend['koerslijst']));
 
-        $this->assertEquals( 1000, $berekend['koerslijst']['euro6_norm_korting'] );
-        $this->assertEquals( 4058, $berekend['koerslijst']['netto_bpm'] );
+        $this->assertEquals(1000, $berekend['koerslijst']['euro6_norm_korting']);
+        $this->assertEquals(4058, $berekend['koerslijst']['netto_bpm']);
     }
 
     // FIXME http://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/prive/auto_en_vervoer/belastingen_op_auto_en_motor/belasting_van_personenautos_en_motorrijwielen_bpm/waarover_bpm_berekenen/bpm_tarief_co_2_uitstoot_personenauto
@@ -334,16 +332,16 @@ class TestBpmBerekening extends PHPUnit_Framework_TestCase
         $BpmBerekening->setCo2Uitstoot(160);
         $BpmBerekening->setConsumentenprijs(35000);
         $BpmBerekening->setNettoCatalogusprijs(21116);
-        $BpmBerekening->setDatum( new DateTime("now") );
+        $BpmBerekening->setDatum(new DateTime("now"));
         $BpmBerekening->setDatumEersteIngebruikname("08-04-2010");
         $BpmBerekening->setInkoopwaarde(13300);
         $BpmBerekening->setSoortAuto("personenauto");
 
         $berekend = $BpmBerekening->berekenBPM();
 
-        $this->assertTrue( is_array($berekend) );
-        $this->assertTrue( isset($berekend['koerslijst']) );
-        $this->assertTrue( isset($berekend['forfaitaire_tabel']) );
+        $this->assertTrue(is_array($berekend));
+        $this->assertTrue(isset($berekend['koerslijst']));
+        $this->assertTrue(isset($berekend['forfaitaire_tabel']));
 //        $this->assertTrue( isset($berekend['taxatierapport']) );
 
         // TODO

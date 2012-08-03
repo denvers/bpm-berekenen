@@ -6,7 +6,7 @@ namespace BPMBerekening\models\motorrijtuig;
  * Date: 24-07-12
  * Time: 14:04
  */
-class Motorrijtuig {
+abstract class Motorrijtuig {
 
     /**
      * @var int
@@ -119,7 +119,7 @@ class Motorrijtuig {
     }
 
     /**
-     * @param DateTime $datum_ingebruikname
+     * @param \DateTime $datum_ingebruikname
      */
     public function setDatumIngebruikname($datum_ingebruikname)
     {
@@ -127,19 +127,11 @@ class Motorrijtuig {
     }
 
     /**
-     * @return DateTime
+     * @return \DateTime
      */
     public function getDatumEersteIngebruikname()
     {
         return $this->datum_ingebruikname;
-    }
-
-    /**
-     * @param \BPMBerekening\models\motorrijtuig\Motorrijtuig $soort
-     */
-    public function setSoort($soort)
-    {
-        $this->soort = $soort;
     }
 
     /**

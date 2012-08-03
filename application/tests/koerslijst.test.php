@@ -61,10 +61,10 @@ class TestKoerslijst extends PHPUnit_Framework_TestCase
 
     public function testAfschrijvingsPercentageVolledigAfgeschreven()
     {
-        // FIXME wat te doen als het afschrijvingsbedrag gelijk is aan de consumentenprijs?
+        // TODO wat te doen als het afschrijvingsbedrag gelijk is aan de consumentenprijs?
         // misschien kan de PDF van de belastingdienst daar antwoord op geven.
         $Koerslijst = new BPMBerekening\afschrijvingsmethode\Koerslijst();
-        $motorrijtuig = new \BPMBerekening\models\motorrijtuig\Motorrijtuig();
+        $motorrijtuig = new \BPMBerekening\models\motorrijtuig\Personenauto_Diesel();
         $motorrijtuig->setConsumentenprijs(35000);
         $motorrijtuig->getInkoopwaarde(1);
 
