@@ -10,5 +10,24 @@ require_once( dirname(__FILE__) . "/motorrijtuig.php" );
  */
 class Personenauto_Geen_Diesel extends Motorrijtuig
 {
-
+    public function setCo2Uitstoot( $co2_uitstoot )
+    {
+        // Requirement 11:
+        // Geen co2_uitstoot vastgesteld; Dan wordt de CO2-uitstoot vastgesteld op 350 gr/km voor een benzineauto
+        if ( is_null($co2_uitstoot) )
+        {
+            $this->co2_uitstoot = 350;
+        }
+        else
+        {
+            if ( $co2_uitstoot >= 0 )
+            {
+                $this->co2_uitstoot = $co2_uitstoot;
+            }
+            else
+            {
+                $this->co2_uitstoot = 0;
+            }
+        }
+    }
 }

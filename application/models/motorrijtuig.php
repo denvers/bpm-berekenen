@@ -11,7 +11,7 @@ class Motorrijtuig {
     /**
      * @var int
      */
-    private $co2_uitstoot;
+    protected $co2_uitstoot;
 
     /**
      * @var DateTime
@@ -61,7 +61,7 @@ class Motorrijtuig {
     /**
      * @var boolean
      */
-    private $euro_6norm;
+    protected $euro_6norm = false;
 
     /**
      * @var double

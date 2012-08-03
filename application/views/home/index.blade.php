@@ -38,6 +38,10 @@
                 <?= Form::select('brandstof', array('benzine' => 'Benzine', 'diesel' => 'Diesel')); ?>
                 <br>
 
+                <?= Form::label('euro6_norm', 'Dieselpersonenauto voldoet aan EURO6 norm?'); ?>
+                <?= Form::checkbox('euro6_norm', 'ja'); ?>
+                <br>
+
                 <?= Form::label('datum_eerste_ingebruikname', 'Datum eerste toelating'); ?>
                 <?= Form::text('datum_eerste_ingebruikname', Input::get('datum_eerste_ingebruikname')); ?> <em>01-01-1970</em>
                 <br>
@@ -73,6 +77,7 @@
                 'afschrijvingspercentage' => $afschrijvingspercentage,
                 'bpm_over_c02_uitstoot' => $bpm_over_c02,
                 'bpm_over_catalogusprijs' => $bpm_over_catalogusprijs,
+                'korting' => 1000,
                 'bruto_bpm' => $bruto_bpm,
                 'netto_bpm' => $netto_bpm,
                 -->
@@ -99,6 +104,7 @@
                             <li>BPM over CO<sub>2</sub>-uitstoot: &euro; <?= number_format($berekening['koerslijst']['bpm_over_c02_uitstoot'], 0, ",", "."); ?>,-</li>
                             <li>BPM over catalogusprijs: &euro; <?= number_format($berekening['koerslijst']['bpm_over_catalogusprijs'], 0, ",", "."); ?>,-</li>
                             <li>Bruto bpm (op datum aangifte): &euro; <?= number_format($berekening['koerslijst']['bruto_bpm'], 0, ",", "."); ?>,-</li>
+                            <li>EURO6-norm korting: &euro; <?= number_format($berekening['koerslijst']['euro6_norm_korting'], 0, ",", "."); ?>,-</li>
                             <li><b>Te betalen bpm (netto bpm): &euro; <?= number_format($berekening['koerslijst']['netto_bpm'], 0, ",", "."); ?>,-</b></li>
                         </ul>
                     </div>

@@ -2,8 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bf74baf7-1aa5-43fb-aac3-9ad65ccece66" name="Default" comment="">
-      <change type="MOVED" beforePath="$PROJECT_DIR$/application/tests/requirements_coverage_0-10.test.php" afterPath="$PROJECT_DIR$/application/tests/requirements_coverage_0-6.test.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/tests/requirements_coverage_7-10.test.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/home.php" afterPath="$PROJECT_DIR$/application/controllers/home.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/bpm_berekening.php" afterPath="$PROJECT_DIR$/application/models/bpm_berekening.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/forfaitaire_tabel.php" afterPath="$PROJECT_DIR$/application/models/forfaitaire_tabel.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/motorrijtuig.php" afterPath="$PROJECT_DIR$/application/models/motorrijtuig.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/personenauto_diesel.php" afterPath="$PROJECT_DIR$/application/models/personenauto_diesel.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/personenauto_geen_diesel.php" afterPath="$PROJECT_DIR$/application/models/personenauto_geen_diesel.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/tests/bpm_berekening.test.php" afterPath="$PROJECT_DIR$/application/tests/bpm_berekening.test.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/tests/forfaitaire_tabel.test.php" afterPath="$PROJECT_DIR$/application/tests/forfaitaire_tabel.test.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/tests/requirements_coverage_0-6.test.php" afterPath="$PROJECT_DIR$/application/tests/requirements_coverage_0-6.test.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/home/index.blade.php" afterPath="$PROJECT_DIR$/application/views/home/index.blade.php" />
     </list>
     <ignored path="bpm-berekenen.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -29,19 +39,41 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="requirements_coverage_0-6.test.php" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/application/tests/requirements_coverage_0-6.test.php">
+      <file leaf-file-name="bpm_berekening.php" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/application/models/bpm_berekening.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="6" column="26" selection-start="159" selection-end="159" vertical-scroll-proportion="0.14173229">
+            <state line="541" column="24" selection-start="21189" selection-end="21189" vertical-scroll-proportion="0.4318555">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="bpm_berekening.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/models/bpm_berekening.php">
+      <file leaf-file-name="bpm_berekening.test.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/tests/bpm_berekening.test.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="281" column="19" selection-start="7766" selection-end="7766" vertical-scroll-proportion="25.0">
+            <state line="235" column="53" selection-start="11294" selection-end="11294" vertical-scroll-proportion="-3.76">
+              <folding>
+                <element signature="n#testBpmOverCO2UitstootPersonenAutoBenzine#0;n#TestBpmBerekening#0;n#!!top" expanded="false" />
+                <element signature="n#testBpmOverCO2UitstootPersonenAutoAardgas#0;n#TestBpmBerekening#0;n#!!top" expanded="false" />
+                <element signature="n#testBpmOverCO2UitstootPersonenAutoLpg#0;n#TestBpmBerekening#0;n#!!top" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="forfaitaire_tabel.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/models/forfaitaire_tabel.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="22" column="49" selection-start="737" selection-end="737" vertical-scroll-proportion="-7.25">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="forfaitaire_tabel.test.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/tests/forfaitaire_tabel.test.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="52" column="8" selection-start="2449" selection-end="2449" vertical-scroll-proportion="-22.875">
               <folding />
             </state>
           </provider>
@@ -60,22 +92,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/application/controllers/home.php" />
-        <option value="$PROJECT_DIR$/application/config/staging/application.php" />
-        <option value="$PROJECT_DIR$/paths.php" />
-        <option value="$PROJECT_DIR$/phpinfo.php" />
-        <option value="$PROJECT_DIR$/application/config/local/application.php" />
-        <option value="$PROJECT_DIR$/application/views/home/index.blade.php" />
-        <option value="$PROJECT_DIR$/application/tests/forfaitaire_tabel.test.php" />
         <option value="$PROJECT_DIR$/application/models/IAfschrijvingsmethode.php" />
-        <option value="$PROJECT_DIR$/application/models/forfaitaire_tabel.php" />
         <option value="$PROJECT_DIR$/application/models/koerslijst.php" />
         <option value="$PROJECT_DIR$/application/models/aangifteformulier.php" />
-        <option value="$PROJECT_DIR$/application/models/motorrijtuig.php" />
         <option value="$PROJECT_DIR$/application/tests/koerslijst.test.php" />
-        <option value="$PROJECT_DIR$/application/tests/bpm_berekening.test.php" />
-        <option value="$PROJECT_DIR$/application/models/bpm_berekening.php" />
         <option value="$PROJECT_DIR$/application/tests/requirements_coverage_0-10.test.php" />
+        <option value="$PROJECT_DIR$/application/tests/requirements_coverage_0-6.test.php" />
+        <option value="$PROJECT_DIR$/application/models/personenauto_geen_diesel.php" />
+        <option value="$PROJECT_DIR$/application/tests/requirements_coverage_7-10.test.php" />
+        <option value="$PROJECT_DIR$/application/models/motorrijtuig.php" />
+        <option value="$PROJECT_DIR$/application/models/personenauto_diesel.php" />
+        <option value="$PROJECT_DIR$/application/controllers/home.php" />
+        <option value="$PROJECT_DIR$/application/views/home/index.blade.php" />
+        <option value="$PROJECT_DIR$/application/tests/forfaitaire_tabel.test.php" />
+        <option value="$PROJECT_DIR$/application/models/forfaitaire_tabel.php" />
+        <option value="$PROJECT_DIR$/application/models/bpm_berekening.php" />
+        <option value="$PROJECT_DIR$/application/tests/bpm_berekening.test.php" />
       </list>
     </option>
   </component>
@@ -191,6 +223,46 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="home" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bpm-berekenen" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bpm-berekenen" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="application" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bpm-berekenen" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bpm-berekenen" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="application" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="tests" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -210,6 +282,24 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="models" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bpm-berekenen" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bpm-berekenen" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="application" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="controllers" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -312,7 +402,11 @@
       <created>1344016495878</created>
       <updated>1344016495878</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Unit tests: Coverage voor requirements 0 tot 6">
+      <created>1344016561034</created>
+      <updated>1344016561034</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -378,7 +472,7 @@
     <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Unit tests: Coverage voor requirements 0 tot 5" />
+    <option name="LAST_COMMIT_MESSAGE" value="Unit tests: Coverage voor requirements 0 tot 6" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -394,46 +488,12 @@
     <MESSAGE value="initial import" />
     <MESSAGE value="Logging met behulp van Laravel" />
     <MESSAGE value="Unit tests: Coverage voor requirements 0 tot 5" />
+    <MESSAGE value="Unit tests: Coverage voor requirements 0 tot 6" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/laravel/log.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="38" selection-start="169" selection-end="169" vertical-scroll-proportion="0.24834438" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/tests/motorrijtuig.test.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/models/personenauto_diesel.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="39" selection-start="208" selection-end="208" vertical-scroll-proportion="0.37878788" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/models/lpg_af_fabriek.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/models/IAfschrijvingsmethode.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="46" selection-start="365" selection-end="365" vertical-scroll-proportion="0.4398148" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/tests/forfaitaire_tabel.test.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="1" selection-start="487" selection-end="487" vertical-scroll-proportion="-2.4" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/models/forfaitaire_tabel.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="39" column="73" selection-start="1194" selection-end="1194" vertical-scroll-proportion="-2.5" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/models/aangifteformulier.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="22" column="6" selection-start="651" selection-end="651" vertical-scroll-proportion="-0.625" />
@@ -459,26 +519,83 @@
         <state line="49" column="15" selection-start="1412" selection-end="1416" vertical-scroll-proportion="0.2683706" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/tests/bpm_berekening.test.php">
+    <entry file="file://$PROJECT_DIR$/application/tests/requirements_coverage_0-6.test.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="282" column="15" selection-start="10355" selection-end="10355" vertical-scroll-proportion="0.6692913" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/models/motorrijtuig.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="93" column="35" selection-start="1425" selection-end="1425" vertical-scroll-proportion="0.30555555" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/models/bpm_berekening.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="281" column="19" selection-start="7766" selection-end="7766" vertical-scroll-proportion="25.0">
+        <state line="241" column="37" selection-start="9253" selection-end="9253" vertical-scroll-proportion="0.6084829">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/tests/requirements_coverage_0-6.test.php">
+    <entry file="file://$PROJECT_DIR$/application/models/personenauto_geen_diesel.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="26" selection-start="159" selection-end="159" vertical-scroll-proportion="0.14173229">
+        <state line="30" column="9" selection-start="756" selection-end="756" vertical-scroll-proportion="0.6944444">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/tests/requirements_coverage_7-10.test.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="47" selection-start="125" selection-end="125" vertical-scroll-proportion="-2.5">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/home/index.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="106" column="104" selection-start="5316" selection-end="5334" vertical-scroll-proportion="-21.25">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/models/personenauto_diesel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="39" column="20" selection-start="918" selection-end="918" vertical-scroll-proportion="0.86741215">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/home.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="79" column="48" selection-start="3200" selection-end="3200" vertical-scroll-proportion="0.8503937">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/models/motorrijtuig.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="63" column="33" selection-start="864" selection-end="864" vertical-scroll-proportion="0.21296297">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/tests/bpm_berekening.test.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="235" column="53" selection-start="11294" selection-end="11294" vertical-scroll-proportion="-3.76">
+          <folding>
+            <element signature="n#testBpmOverCO2UitstootPersonenAutoBenzine#0;n#TestBpmBerekening#0;n#!!top" expanded="false" />
+            <element signature="n#testBpmOverCO2UitstootPersonenAutoAardgas#0;n#TestBpmBerekening#0;n#!!top" expanded="false" />
+            <element signature="n#testBpmOverCO2UitstootPersonenAutoLpg#0;n#TestBpmBerekening#0;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/models/forfaitaire_tabel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="49" selection-start="737" selection-end="737" vertical-scroll-proportion="-7.25">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/tests/forfaitaire_tabel.test.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="52" column="8" selection-start="2449" selection-end="2449" vertical-scroll-proportion="-22.875">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/models/bpm_berekening.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="541" column="24" selection-start="21189" selection-end="21189" vertical-scroll-proportion="0.4318555">
           <folding />
         </state>
       </provider>

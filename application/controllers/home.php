@@ -75,6 +75,11 @@ class Home_Controller extends Base_Controller
         $BPM_Berekening->setNettoCatalogusprijs(Input::get('netto_catalogusprijs_eerste_ingebruikname'));
         $BPM_Berekening->setSoortAuto(Input::get('soort'));
 
+        if ( Input::get('euro6_norm') == "ja" )
+        {
+            $BPM_Berekening->setEuro6Norm(true);
+        }
+
         return $BPM_Berekening->berekenBPM("forfaitaire_tabel");
     }
 }

@@ -20,7 +20,7 @@ class Forfaitaire_Tabel implements IAfschrijvingsmethode
     private $motorrijtuig;
 
     /**
-     * @param Motorrijtuig $motorrijtuig
+     * @param \BPMBerekening\models\motorrijtuig\Motorrijtuig $motorrijtuig
      * @return void
      */
     public function setMotorrijtuig($motorrijtuig)

@@ -1,19 +1,21 @@
 <?php
 namespace BPMBerekening\models;
 
-require_once( dirname(__FILE__) . "/../models/forfaitaire_tabel.php" );
-require_once( dirname(__FILE__) . "/../models/koerslijst.php" );
+require_once(dirname(__FILE__) . "/../models/forfaitaire_tabel.php");
+require_once(dirname(__FILE__) . "/../models/koerslijst.php");
 
-require_once( dirname(__FILE__) . "/../models/personenauto_diesel.php" );
-require_once( dirname(__FILE__) . "/../models/personenauto_geen_diesel.php" );
+require_once(dirname(__FILE__) . "/../models/personenauto_diesel.php");
+require_once(dirname(__FILE__) . "/../models/personenauto_geen_diesel.php");
 
-require_once( dirname(__FILE__) . "/../models/bestelauto_diesel.php" );
-require_once( dirname(__FILE__) . "/../models/bestelauto_geen_diesel.php" );
+require_once(dirname(__FILE__) . "/../models/bestelauto_diesel.php");
+require_once(dirname(__FILE__) . "/../models/bestelauto_geen_diesel.php");
 
-require_once( dirname(__FILE__) . "/../models/kampeerauto_diesel.php" );
-require_once( dirname(__FILE__) . "/../models/kampeerauto_geen_diesel.php" );
+require_once(dirname(__FILE__) . "/../models/kampeerauto_diesel.php");
+require_once(dirname(__FILE__) . "/../models/kampeerauto_geen_diesel.php");
 
-require_once( dirname(__FILE__) . "/../models/motorfiets.php" );
+require_once(dirname(__FILE__) . "/../models/motorfiets.php");
+
+use DateTime;
 
 /**
  * User: dsessink
@@ -73,6 +75,11 @@ class BPM_Berekening
      * @var int
      */
     private $inkoopwaarde;
+
+    /**
+     * @var boolean;
+     */
+    private $euro6_norm;
 
     /**
      * @param string $brandstof
@@ -135,8 +142,7 @@ class BPM_Berekening
      */
     public function setSoortAuto($soort_auto)
     {
-        switch($soort_auto)
-        {
+        switch ($soort_auto) {
             case "personenauto":
                 $this->soort_auto = $soort_auto;
                 break;
@@ -154,7 +160,7 @@ class BPM_Berekening
                 break;
 
             default:
-                    throw new \Exception("Onbekend soort auto gedetecteerd.");
+                throw new \Exception("Onbekend soort auto gedetecteerd.");
                 break;
         }
     }
@@ -181,37 +187,28 @@ class BPM_Berekening
      */
     public function getMotorrijtuig()
     {
-        switch($this->getSoortAuto())
-        {
+        switch ($this->getSoortAuto()) {
             case "personenauto":
-                if ( $this->brandstof == "diesel" )
-                {
+                if ($this->brandstof == "diesel") {
                     $motorrijtuig = new \BPMBerekening\models\motorrijtuig\Personenauto_Diesel();
-                }
-                else
-                {
+                    $motorrijtuig->setEuro6Norm($this->euro6_norm);
+                } else {
                     $motorrijtuig = new \BPMBerekening\models\motorrijtuig\Personenauto_Geen_Diesel();
                 }
                 break;
 
             case "kampeerauto":
-                if ( $this->brandstof == "diesel" )
-                {
+                if ($this->brandstof == "diesel") {
                     $motorrijtuig = new \BPMBerekening\models\motorrijtuig\Kampeerauto_Diesel();
-                }
-                else
-                {
+                } else {
                     $motorrijtuig = new \BPMBerekening\models\motorrijtuig\Kampeerauto_Geen_Diesel();
                 }
                 break;
 
             case "bestelauto":
-                if ( $this->brandstof == "diesel" )
-                {
+                if ($this->brandstof == "diesel") {
                     $motorrijtuig = new \BPMBerekening\models\motorrijtuig\Bestelauto_Diesel();
-                }
-                else
-                {
+                } else {
                     $motorrijtuig = new \BPMBerekening\models\motorrijtuig\Bestelauto_Geen_Diesel();
                 }
                 break;
@@ -221,14 +218,14 @@ class BPM_Berekening
                 break;
 
             default:
-                throw new \Exception("Onbekend soort auto: ".$this->getSoortAuto());
+                throw new \Exception("Onbekend soort auto: " . $this->getSoortAuto());
                 break;
         }
 
         $motorrijtuig->setBrandstofsoort($this->brandstof);
         $motorrijtuig->setCo2Uitstoot($this->co2_uitstoot);
         $motorrijtuig->setConsumentenprijs($this->consumentenprijs);
-        $motorrijtuig->setDatumIngebruikname( new \DateTime($this->datum_eerste_ingebruikname) );
+        $motorrijtuig->setDatumIngebruikname(new DateTime($this->datum_eerste_ingebruikname));
         $motorrijtuig->setNettoCatalogusprijs($this->netto_catalogusprijs);
         $motorrijtuig->setSoort($this->soort_auto);
         $motorrijtuig->setInkoopwaarde($this->inkoopwaarde);
@@ -267,25 +264,21 @@ class BPM_Berekening
                 $classname == 'BPMBerekening\models\motorrijtuig\Kampeerauto_Diesel' ||
                 $classname == 'BPMBerekening\models\motorrijtuig\Kampeerauto_Geen_Diesel' ||
                 $classname == 'BPMBerekening\models\motorrijtuig\Motorfiets'
-                )
             )
-        {
+        ) {
             return true;
         }
 
         // Requirement 5:
         // U betaalt ook geen bpm voor personenauto’s die op of na 1 januari 2009 voor het eerst in gebruik zijn genomen en uitgerust zijn met een benzinemotor met een CO2-uitstoot van maximaal 102 gram per kilometer
-        if ( $classname == 'BPMBerekening\models\motorrijtuig\Personenauto_Geen_Diesel' )
-        {
-            if ( $motorrijtuig->getCo2Uitstoot() <= 102 )
-            {
+        if ($classname == 'BPMBerekening\models\motorrijtuig\Personenauto_Geen_Diesel') {
+            if ($motorrijtuig->getCo2Uitstoot() <= 102) {
                 /**
                  * @var DateTime
                  */
                 $datum_eerste_ingebruikname = $motorrijtuig->getDatumEersteIngebruikname();
 
-                if ( $datum_eerste_ingebruikname->format("Ymd") >= 20090101 )
-                {
+                if ($datum_eerste_ingebruikname->format("Ymd") >= 20090101) {
                     return true;
                 }
             }
@@ -293,17 +286,14 @@ class BPM_Berekening
 
         // Requirement 6:
         // U betaalt ook geen bpm voor personenauto’s die op of na 1 januari 2009 voor het eerst in gebruik zijn genomen en uitgerust zijn met een dieselmotor met een CO2-uitstoot van maximaal 91 gram per kilometer
-        if ( $classname == 'BPMBerekening\models\motorrijtuig\Personenauto_Diesel' )
-        {
-            if ( $motorrijtuig->getCo2Uitstoot() <= 91 )
-            {
+        if ($classname == 'BPMBerekening\models\motorrijtuig\Personenauto_Diesel') {
+            if ($motorrijtuig->getCo2Uitstoot() <= 91) {
                 /**
                  * @var DateTime
                  */
                 $datum_eerste_ingebruikname = $motorrijtuig->getDatumEersteIngebruikname();
 
-                if ( $datum_eerste_ingebruikname->format("Ymd") >= 20090101 )
-                {
+                if ($datum_eerste_ingebruikname->format("Ymd") >= 20090101) {
                     return true;
                 }
             }
@@ -320,8 +310,7 @@ class BPM_Berekening
         $motorrijtuig = $this->getMotorrijtuig();
         $bpmberekening = array();
 
-        if ( true === $this->geenBpmVoorMotorrijtuigOpBasisVanCO2Uitstoot($motorrijtuig) )
-        {
+        if (true === $this->geenBpmVoorMotorrijtuigOpBasisVanCO2Uitstoot($motorrijtuig)) {
             $bpmberekening['koerslijst'] = array(
                 'afschrijvingspercentage' => "n.v.t.",
                 'bpm_over_c02_uitstoot' => 0,
@@ -341,40 +330,11 @@ class BPM_Berekening
             return $bpmberekening;
         }
 
-        // Algemene BPM berekeningen
-        $bpm_over_c02 = $this->berekenBpmOverCO2Uitstoot($this->brandstof, $this->co2_uitstoot);
-        $bpm_over_catalogusprijs = $this->berekenBpmOverCatalogusprijs($this->brandstof, $this->netto_catalogusprijs, $this->co2_uitstoot);
-        $bruto_bpm = $this->berekenBrutoBpm($bpm_over_c02, $bpm_over_catalogusprijs);
+        // Koerslijst
+        $bpmberekening['koerslijst'] = $this->berekenBpmVolgensKoerslijst($motorrijtuig);
 
         // Forfaitaire_tabel
-        $Forfaitaire_Tabel = new \BPMBerekening\afschrijvingsmethode\Forfaitaire_Tabel();
-        $Forfaitaire_Tabel->setMotorrijtuig($motorrijtuig);
-        $afschrijvingspercentage = $Forfaitaire_Tabel->berekenAfschrijvingspercentage($this->datum);
-
-        $netto_bpm = $this->berekenNettoBpmBedrag($afschrijvingspercentage, $bruto_bpm);
-
-        $bpmberekening['forfaitaire_tabel'] = array(
-            'afschrijvingspercentage' => $afschrijvingspercentage,
-            'bpm_over_c02_uitstoot' => $bpm_over_c02,
-            'bpm_over_catalogusprijs' => $bpm_over_catalogusprijs,
-            'bruto_bpm' => $bruto_bpm,
-            'netto_bpm' => $netto_bpm,
-        );
-
-        // Koerslijst
-        $Koerslijst = new \BPMBerekening\afschrijvingsmethode\Koerslijst();
-        $Koerslijst->setMotorrijtuig($motorrijtuig);
-        $afschrijvingspercentage = $Koerslijst->berekenAfschrijvingspercentage($this->datum);
-
-        $netto_bpm = $this->berekenNettoBpmBedrag($afschrijvingspercentage, $bruto_bpm);
-
-        $bpmberekening['koerslijst'] = array(
-            'afschrijvingspercentage' => $afschrijvingspercentage,
-            'bpm_over_c02_uitstoot' => $bpm_over_c02,
-            'bpm_over_catalogusprijs' => $bpm_over_catalogusprijs,
-            'bruto_bpm' => $bruto_bpm,
-            'netto_bpm' => $netto_bpm,
-        );
+        $bpmberekening['forfaitaire_tabel'] = $this->berekenBpmVolgensForfaitaireTabel($motorrijtuig);
 
         // Taxatierapport
         // TODO
@@ -387,6 +347,62 @@ class BPM_Berekening
 //        );
 
         return $bpmberekening;
+    }
+
+    /**
+     * @param \BPMBerekening\models\motorrijtuig\Motorrijtuig $motorrijtuig
+     */
+    private function berekenBpmVolgensKoerslijst($motorrijtuig)
+    {
+        // Requirement 7:
+        $bpm_over_c02 = $this->berekenBpmOverCO2Uitstoot($this->brandstof, $this->co2_uitstoot);
+
+        // Requirement 8: 2/2 van de hoogte van het te betalen bpm-bedrag voor personenauto's wordt bepaald door de catalogusprijs van de personenauto (BPM)
+        // Requirement 9: De hoogte van het te betalen bpm-bedrag voor motoren wordt uitsluitend bepaald door de CO2-uitstoot van de motor in gram per kilometer
+        // Requirement 10: De hoogte van het te betalen bpm-bedrag voor bestelauto's wordt uitsluitend bepaald door de CO2-uitstoot van de motor in gram per kilometer
+        $bpm_over_catalogusprijs = $this->berekenBpmOverCatalogusprijs($this->brandstof, $this->netto_catalogusprijs, $this->co2_uitstoot);
+
+        $bruto_bpm = $this->berekenBrutoBpm($bpm_over_c02, $bpm_over_catalogusprijs);
+
+        $Koerslijst = new \BPMBerekening\afschrijvingsmethode\Koerslijst();
+        $Koerslijst->setMotorrijtuig($motorrijtuig);
+        $afschrijvingspercentage = $Koerslijst->berekenAfschrijvingspercentage($this->datum);
+
+        $netto_bpm = $this->berekenNettoBpmBedrag($afschrijvingspercentage, $bruto_bpm);
+
+        return array(
+            'afschrijvingspercentage' => $afschrijvingspercentage,
+            'bpm_over_c02_uitstoot' => $bpm_over_c02,
+            'bpm_over_catalogusprijs' => $bpm_over_catalogusprijs,
+            'euro6_norm_korting' => ($this->getBrandstof() == "diesel" && $this->getSoortAuto() == "personenauto" && $this->euro6_norm === true) ? 1000 : 0,
+            'bruto_bpm' => $bruto_bpm,
+            'netto_bpm' => $netto_bpm,
+        );
+    }
+
+    /**
+     * @param \BPMBerekening\models\motorrijtuig\Motorrijtuig $motorrijtuig
+     */
+    private function berekenBpmVolgensForfaitairetabel($motorrijtuig)
+    {
+        $bpm_over_c02 = $this->berekenBpmOverCO2Uitstoot($this->brandstof, $this->co2_uitstoot);
+        $bpm_over_catalogusprijs = $this->berekenBpmOverCatalogusprijs($this->brandstof, $this->netto_catalogusprijs, $this->co2_uitstoot);
+
+        $bruto_bpm = $this->berekenBrutoBpm($bpm_over_c02, $bpm_over_catalogusprijs);
+
+        $Forfaitaire_Tabel = new \BPMBerekening\afschrijvingsmethode\Forfaitaire_Tabel();
+        $Forfaitaire_Tabel->setMotorrijtuig($motorrijtuig);
+        $afschrijvingspercentage = $Forfaitaire_Tabel->berekenAfschrijvingspercentage($this->datum);
+
+        $netto_bpm = $this->berekenNettoBpmBedrag($afschrijvingspercentage, $bruto_bpm);
+
+        return array(
+            'afschrijvingspercentage' => $afschrijvingspercentage,
+            'bpm_over_c02_uitstoot' => $bpm_over_c02,
+            'bpm_over_catalogusprijs' => $bpm_over_catalogusprijs,
+            'bruto_bpm' => $bruto_bpm,
+            'netto_bpm' => $netto_bpm,
+        );
     }
 
     /**
@@ -405,10 +421,12 @@ class BPM_Berekening
      * @param $co2_uitstoot
      * @return mixed
      * @throws \Exception
-     * @test done
+     * @requirement 7
      */
     public function berekenBpmOverCO2Uitstoot($brandstof, $co2_uitstoot)
     {
+        // Requirement 7:
+        // 1/2 van de hoogte van het te betalen bpm-bedrag voor personenauto's wordt bepaald door de CO2-uitstoot van de personenauto in gram per kilometer (BPM toeslag)
         if (strtolower($brandstof) == "diesel") {
             return $this->berekenBpmOverCO2UitstootDiesel($co2_uitstoot);
         } elseif (strtolower($brandstof) == "benzine") {
@@ -419,7 +437,7 @@ class BPM_Berekening
             return $this->berekenBpmOverCO2UitstootBenzine($co2_uitstoot);
         }
         else {
-            $ex = new \Exception("#1: Brandstof: ".$brandstof." is onbekend.");
+            $ex = new \Exception("#1: Brandstof: " . $brandstof . " is onbekend.");
             \Laravel\Log::exception($ex);
             throw $ex;
         }
@@ -428,7 +446,11 @@ class BPM_Berekening
     /**
      * @param $co2_uitstoot
      * @return mixed
-     * @test done
+     * @requirement 23: CO2-uitstoot van 0 tot en met 91 gram/km: trek van de CO2-uitstoot van de auto de waarde 0 af vermenigvuldig de uitkomst met het bedrag 0 tel hier het bedrag 0 bij op
+     * @requirement 24: CO2-uitstoot van 91 tot en met 143 gram/km: trek van de CO2-uitstoot van de auto de waarde 91 af vermenigvuldig de uitkomst met het bedrag 101 tel hier het bedrag 0 bij op
+     * @requirement 25: CO2-uitstoot van 143 tot en met 211 gram/km: trek van de CO2-uitstoot van de auto de waarde 143 af vermenigvuldig de uitkomst met het bedrag 121 tel hier het bedrag 5252 bij op
+     * @requirement 26: CO2-uitstoot van 211 tot en met 225 gram/km: trek van de CO2-uitstoot van de auto de waarde 211 af vermenigvuldig de uitkomst met het bedrag 223 tel hier het bedrag 13480 bij op
+     * @requirement 27: CO2-uitstoot van 225 gram/km en hoger: trek van de CO2-uitstoot van de auto de waarde 225 af vermenigvuldig de uitkomst met het bedrag 559 tel hier het bedrag 16602 bij op
      */
     private function berekenBpmOverCO2UitstootDiesel($co2_uitstoot)
     {
@@ -444,15 +466,16 @@ class BPM_Berekening
             array('I' => 0, 'II' => 91, 'III' => 0, 'IV' => 0),
             array('I' => 91, 'II' => 143, 'III' => 0, 'IV' => 101),
             array('I' => 143, 'II' => 211, 'III' => 5252, 'IV' => 121),
-            array('I' => 211, 'II' => 225, 'III' => 13480, 'IV' => 559),
+            array('I' => 211, 'II' => 225, 'III' => 13480, 'IV' => 223),
             array('I' => 255, 'II' => 1000000000, 'III' => 16602, 'IV' => 559),
         );
 
         // toe te passen rekenwaarde vinden
         $toegepaste_rekenwaarde = null;
-        foreach ($rekenwaarden as $key => $rekenwaarde) {
-            if ($co2_uitstoot > $rekenwaarde['I'] && $co2_uitstoot < $rekenwaarde['II']) {
+        foreach ($rekenwaarden as $rekenwaarde) {
+            if ($co2_uitstoot >= $rekenwaarde['I'] && $co2_uitstoot <= $rekenwaarde['II']) {
                 $toegepaste_rekenwaarde = $rekenwaarde;
+                break;
             }
         }
 
@@ -466,7 +489,11 @@ class BPM_Berekening
     /**
      * @param $co2_uitstoot
      * @return mixed
-     * @test done
+     * @requirement 18: CO2 uitstoot van 0 tot en met 102 gram/km: trek van de CO2-uitstoot van de auto de waarde 0 af vermenigvuldig de uitkomst met het bedrag 0 tel hier het bedrag 0 bij op
+     * @requirement 19: CO2 uitstoot van 102 tot en met 159 gram/km: trek van de CO2-uitstoot van de auto de waarde 102 af vermenigvuldig de uitkomst met het bedrag 101 tel hier het bedrag 0 bij op
+     * @requirement 20: CO2 uitstoot van 159 tot en met 237 gram/km: trek van de CO2-uitstoot van de auto de waarde 159 af vermenigvuldig de uitkomst met het bedrag 121 tel hier het bedrag 5757 bij op
+     * @requirement 21: CO2 uitstoot van 237 tot en met 242 gram/km: trek van de CO2-uitstoot van de auto de waarde 237 af vermenigvuldig de uitkomst met het bedrag 223 tel hier het bedrag 15195 bij op
+     * @requirement 22: CO2 uitstoot van 242 en hoger: trek van de CO2-uitstoot van de auto de waarde 242 af vermenigvuldig de uitkomst met het bedrag 559 tel hier het bedrag 16310 bij op
      */
     private function berekenBpmOverCO2UitstootBenzine($co2_uitstoot)
     {
@@ -487,9 +514,10 @@ class BPM_Berekening
 
         // toe te passen rekenwaarde vinden
         $toegepaste_rekenwaarde = null;
-        foreach ($rekenwaarden as $key => $rekenwaarde) {
+        foreach ($rekenwaarden as $rekenwaarde) {
             if ($co2_uitstoot >= $rekenwaarde['I'] && $co2_uitstoot <= $rekenwaarde['II']) {
                 $toegepaste_rekenwaarde = $rekenwaarde;
+                break;
             }
         }
 
@@ -505,16 +533,23 @@ class BPM_Berekening
      * @param $netto_catalogusprijs
      * @param $co2_uitstoot
      * @return float
-     * @test done
+     * @requirement 8: 2/2 van de hoogte van het te betalen bpm-bedrag voor personenauto's wordt bepaald door de catalogusprijs van de personenauto (BPM)
      */
     public function berekenBpmOverCatalogusprijs($brandstof, $netto_catalogusprijs, $co2_uitstoot)
     {
-        if (strtolower($brandstof) == "diesel") {
-            return $this->berekenBpmOverCatalogusprijsDiesel($netto_catalogusprijs, $co2_uitstoot);
+        $bpm_over_catalogusprijs = 0;
+
+        if ($this->getSoortAuto() == "personenauto") {
+            // Requirement 8:
+            // 2/2 van de hoogte van het te betalen bpm-bedrag voor personenauto's wordt bepaald door de catalogusprijs van de personenauto (BPM)
+            if (strtolower($brandstof) == "diesel") {
+                $bpm_over_catalogusprijs = $this->berekenBpmOverCatalogusprijsDiesel($netto_catalogusprijs, $co2_uitstoot);
+            } else {
+                $bpm_over_catalogusprijs = $this->berekenBpmOverCatalogusprijsGeenDiesel($netto_catalogusprijs);
+            }
         }
-        else {
-            return $this->berekenBpmOverCatalogusprijsGeenDiesel($netto_catalogusprijs);
-        }
+
+        return $bpm_over_catalogusprijs;
     }
 
     /**
@@ -562,9 +597,11 @@ class BPM_Berekening
         $bpm_tarief = 11.1;
         $brandstofkorting = 450;
 
-        $bpm = floor( ($netto_catalogusprijs * $bpm_tarief / 100) - $brandstofkorting );
+        $bpm = floor(($netto_catalogusprijs * $bpm_tarief / 100) - $brandstofkorting);
 
-        $this->output("Bpm over catalogusprijs (geen diesel): (" . $netto_catalogusprijs . " x " . $bpm_tarief . "/100) - EUR ".$brandstofkorting." = EUR ".$bpm."<br>");
+        if ($bpm < 0) $bpm = 0;
+
+        $this->output("Bpm over catalogusprijs (geen diesel): (" . $netto_catalogusprijs . " x " . $bpm_tarief . "/100) - EUR " . $brandstofkorting . " = EUR " . $bpm . "<br>");
 
         return $bpm;
     }
@@ -572,6 +609,14 @@ class BPM_Berekening
     private function berekenNettoBpmBedrag($afschrijvingspercentage, $bruto_bpm)
     {
         $bpm = floor(((100 - $afschrijvingspercentage) / 100) * $bruto_bpm);
+
+        // Requirement 31: 1000 EUR korting op de bpm als de dieselpersonenauto voldoet aan de EURO 6-norm
+        if ($this->euro6_norm === true && $this->getBrandstof() == "diesel" && $this->getSoortAuto() == "personenauto") {
+            $bpm = $bpm - 1000;
+            $this->output("Euro6 norm korting: 1000 EUR<br>");
+        }
+
+        if ($bpm < 0) $bpm = 0;
 
         $this->output("Te betalen bpm: ((100 - " . $afschrijvingspercentage . "%) / 100) x " . $bruto_bpm . " = EUR " . $bpm . "<br>");
 
@@ -581,5 +626,13 @@ class BPM_Berekening
     private function output($msg)
     {
         \Laravel\Log::info($msg);
+    }
+
+    /**
+     * @param boolean $euro6_norm
+     */
+    public function setEuro6Norm($euro6_norm)
+    {
+        $this->euro6_norm = $euro6_norm;
     }
 }
