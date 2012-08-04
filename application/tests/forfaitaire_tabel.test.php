@@ -19,6 +19,12 @@ class TestForfaitaireTabel extends PHPUnit_Framework_TestCase
 
     }
 
+    /**
+     * @requirement 47 Te betalen bpm over co2-uitstoot: 7309 EUR
+     * @requirement 48 Te betalen bpm over catalogusprijs: 6004 EUR
+     * @requirement 49 Bruto bpm op datum aangifte: 13.313 EUR
+     * @requirement 50 Te betalen bpm (netto): 9.008 EUR
+     */
     public function testBpmBerekening()
     {
         // Personenauto,
@@ -39,7 +45,7 @@ class TestForfaitaireTabel extends PHPUnit_Framework_TestCase
         $BPM_berekening->setBrandstof("diesel");
         $BPM_berekening->setDatum(new DateTime("26-04-2011"));
         $BPM_berekening->setCo2Uitstoot(160);
-        $BPM_berekening->setDatumEersteIngebruikname("08-07-2012");
+        $BPM_berekening->setDatumEersteIngebruikname("08-04-2012");
         $BPM_berekening->setNettoCatalogusprijs(21116);
         $BPM_berekening->setConsumentenprijs(35000);
 
