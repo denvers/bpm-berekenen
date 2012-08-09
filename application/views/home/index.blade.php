@@ -31,7 +31,7 @@
                 <?= Form::open('/', 'POST'); ?>
 
                 <?= Form::label('soort', 'Soort auto'); ?>
-                <?= Form::select('soort', array('personenauto' => 'Personenauto')); ?>
+                <?= Form::select('soort', array('personenauto' => 'Personenauto', 'motorfiets' => 'Motorfiets', 'bestelauto' => 'Bestelauto', 'kampeerauto' => 'Kampeerauto')); ?>
                 <br>
 
                 <?= Form::label('brandstof', 'Brandstof'); ?>
@@ -86,7 +86,7 @@
 
                 <h2>Uw BPM berekening</h2>
 
-                    <div style="display:inline-block; width:45%; padding: 0 15px 0 0;">
+                    <div style="display:inline-block; width:30%; padding: 0 15px 0 0;">
                         <h3>Forfaitaire tabel</h3>
                         <ul>
                             <li>Afschrijvingspercentage: <?= $berekening['forfaitaire_tabel']['afschrijvingspercentage']; ?>%</li>
@@ -97,7 +97,7 @@
                         </ul>
                     </div>
 
-                    <div style="display:inline-block; width:45%; padding: 0 15px 0 0;">
+                    <div style="display:inline-block; width:30%; padding: 0 15px 0 0;">
                         <h3>Koerslijst tabel</h3>
                         <ul>
                             <li>Afschrijvingspercentage: <?= $berekening['koerslijst']['afschrijvingspercentage']; ?>%</li>
@@ -106,6 +106,18 @@
                             <li>Bruto bpm (op datum aangifte): &euro; <?= number_format($berekening['koerslijst']['bruto_bpm'], 0, ",", "."); ?>,-</li>
                             <li>EURO6-norm korting: &euro; <?= number_format($berekening['koerslijst']['euro6_norm_korting'], 0, ",", "."); ?>,-</li>
                             <li><b>Te betalen bpm (netto bpm): &euro; <?= number_format($berekening['koerslijst']['netto_bpm'], 0, ",", "."); ?>,-</b></li>
+                        </ul>
+                    </div>
+
+                    <div style="display:inline-block; width:30%; padding: 0 15px 0 0;">
+                        <h3>Historisch bruto bpm bedrag</h3>
+                        <ul>
+                            <li>Afschrijvingspercentage: <?= $berekening['historisch_bruto_bpm_bedrag']['afschrijvingspercentage']; ?>%</li>
+                            <li>BPM over CO<sub>2</sub>-uitstoot: &euro; <?= number_format($berekening['historisch_bruto_bpm_bedrag']['bpm_over_c02_uitstoot'], 0, ",", "."); ?>,-</li>
+                            <li>BPM over catalogusprijs: &euro; <?= number_format($berekening['historisch_bruto_bpm_bedrag']['bpm_over_catalogusprijs'], 0, ",", "."); ?>,-</li>
+                            <li>Bruto bpm (op datum aangifte): &euro; <?= number_format($berekening['historisch_bruto_bpm_bedrag']['bruto_bpm'], 0, ",", "."); ?>,-</li>
+                            <li>EURO6-norm korting: &euro; <?= number_format($berekening['historisch_bruto_bpm_bedrag']['euro6_norm_korting'], 0, ",", "."); ?>,-</li>
+                            <li><b>Te betalen bpm (netto bpm): &euro; <?= number_format($berekening['historisch_bruto_bpm_bedrag']['netto_bpm'], 0, ",", "."); ?>,-</b></li>
                         </ul>
                     </div>
 

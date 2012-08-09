@@ -1,6 +1,7 @@
 <?php
 namespace BPMBerekening\models;
 
+require_once(dirname(__FILE__) . "/../models/bpm_berekening_historisch.php");
 require_once(dirname(__FILE__) . "/../models/forfaitaire_tabel.php");
 require_once(dirname(__FILE__) . "/../models/koerslijst.php");
 
@@ -336,6 +337,10 @@ class BPM_Berekening
         // Forfaitaire_tabel
         $bpmberekening['forfaitaire_tabel'] = $this->berekenBpmVolgensForfaitaireTabel();
 
+        // Op basis van historisch bruto bpm bedrag
+        // TODO alleen voor auto's > 1 jan 1993
+        $bpmberekening['historisch_bruto_bpm_bedrag'] = $this->berekenBpmVolgensHistorischBrutoBpmBedrag();
+
         // Taxatierapport
         // TODO
 //        $bpmberekening['taxatierapport'] = array(
@@ -350,6 +355,8 @@ class BPM_Berekening
     }
 
     /**
+     * Volledige BPM berekening volgens koerslijst
+     *
      * @param \BPMBerekening\models\motorrijtuig\Motorrijtuig $motorrijtuig
      */
     private function berekenBpmVolgensKoerslijst($motorrijtuig)
@@ -381,6 +388,8 @@ class BPM_Berekening
     }
 
     /**
+     * Volledige BPM berekening volgens forfaitaire tabel
+     *
      * @return array
      */
     public function berekenBpmVolgensForfaitairetabel()
@@ -401,6 +410,37 @@ class BPM_Berekening
             'afschrijvingspercentage' => $afschrijvingspercentage,
             'bpm_over_c02_uitstoot' => $bpm_over_c02,
             'bpm_over_catalogusprijs' => $bpm_over_catalogusprijs,
+            'bruto_bpm' => $bruto_bpm,
+            'netto_bpm' => $netto_bpm,
+        );
+    }
+
+    /**
+     * Volledige BPM berekening volgens historisch bruto bpm bedrag
+     * @return array
+     */
+    public function berekenBpmVolgensHistorischBrutoBpmBedrag()
+    {
+        $motorrijtuig = $this->getMotorrijtuig();
+
+        $bpm_over_c02 = $this->berekenBpmOverCO2Uitstoot($this->brandstof, $this->co2_uitstoot);
+
+        $bpm_berekening_historisch = new \BPMBerekening\models\BPM_Berekening_Historisch();
+        $bpm_over_catalogusprijs = $bpm_berekening_historisch->berekenBpmOverCatalogusprijs($motorrijtuig);
+
+        $bruto_bpm = $this->berekenBrutoBpm($bpm_over_c02, $bpm_over_catalogusprijs);
+
+        $Koerslijst = new \BPMBerekening\afschrijvingsmethode\Koerslijst();
+        $Koerslijst->setMotorrijtuig($motorrijtuig);
+        $afschrijvingspercentage = $Koerslijst->berekenAfschrijvingspercentage($this->datum);
+
+        $netto_bpm = $this->berekenNettoBpmBedrag($afschrijvingspercentage, $bruto_bpm);
+
+        return array(
+            'afschrijvingspercentage' => $afschrijvingspercentage,
+            'bpm_over_c02_uitstoot' => $bpm_over_c02,
+            'bpm_over_catalogusprijs' => $bpm_over_catalogusprijs,
+            'euro6_norm_korting' => ($this->getBrandstof() == "diesel" && $this->getSoortAuto() == "personenauto" && $this->euro6_norm === true) ? 1000 : 0,
             'bruto_bpm' => $bruto_bpm,
             'netto_bpm' => $netto_bpm,
         );

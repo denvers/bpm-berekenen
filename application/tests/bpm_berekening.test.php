@@ -328,6 +328,7 @@ class TestBpmBerekening extends PHPUnit_Framework_TestCase
     {
         $BpmBerekening = new \BPMBerekening\models\BPM_Berekening();
 
+        $BpmBerekening->setSoortAuto("personenauto");
         $BpmBerekening->setBrandstof("diesel");
         $BpmBerekening->setCo2Uitstoot(160);
         $BpmBerekening->setConsumentenprijs(35000);
@@ -335,7 +336,6 @@ class TestBpmBerekening extends PHPUnit_Framework_TestCase
         $BpmBerekening->setDatum(new DateTime("now"));
         $BpmBerekening->setDatumEersteIngebruikname("08-04-2010");
         $BpmBerekening->setInkoopwaarde(13300);
-        $BpmBerekening->setSoortAuto("personenauto");
 
         $berekend = $BpmBerekening->berekenBPM();
 

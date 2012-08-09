@@ -119,6 +119,14 @@ abstract class Motorrijtuig {
     }
 
     /**
+     * @return int
+     */
+    public function getNettoCatalogusprijs()
+    {
+        return $this->netto_catalogusprijs;
+    }
+
+    /**
      * @param \DateTime $datum_ingebruikname
      */
     public function setDatumIngebruikname($datum_ingebruikname)
