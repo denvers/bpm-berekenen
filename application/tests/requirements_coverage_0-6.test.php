@@ -1,6 +1,8 @@
 <?php
 require_once(dirname(__FILE__) . "/../models/bpm_berekening.php");
 
+use \BPMBerekening\models\BPM_Berekening;
+
 /**
  * Deze test class dekt de requirements 1 t/m 6
  */
@@ -12,7 +14,7 @@ class TestRequirements0to6 extends PHPUnit_Framework_TestCase
      */
     public function testRequirement1()
     {
-        $BpmBerekening = new \BPMBerekening\models\BPM_Berekening();
+        $BpmBerekening = new BPM_Berekening();
 
         // dieselpersonenauto
         $BpmBerekening->setSoortAuto("personenauto");
@@ -49,7 +51,7 @@ class TestRequirements0to6 extends PHPUnit_Framework_TestCase
      */
     public function testRequirement2()
     {
-        $BpmBerekening = new \BPMBerekening\models\BPM_Berekening();
+        $BpmBerekening = new BPM_Berekening();
 
         // dieselbestelauto
         $BpmBerekening->setSoortAuto("bestelauto");
@@ -86,7 +88,7 @@ class TestRequirements0to6 extends PHPUnit_Framework_TestCase
      */
     public function testRequirement3()
     {
-        $BpmBerekening = new \BPMBerekening\models\BPM_Berekening();
+        $BpmBerekening = new BPM_Berekening();
 
         // dieselkampeerauto
         $BpmBerekening->setSoortAuto("kampeerauto");
@@ -123,7 +125,7 @@ class TestRequirements0to6 extends PHPUnit_Framework_TestCase
      */
     public function testRequirement4()
     {
-        $BpmBerekening = new \BPMBerekening\models\BPM_Berekening();
+        $BpmBerekening = new BPM_Berekening();
 
         $BpmBerekening->setSoortAuto("motorfiets");
         $BpmBerekening->setBrandstof("benzine");
@@ -145,7 +147,7 @@ class TestRequirements0to6 extends PHPUnit_Framework_TestCase
      */
     public function testRequirement5()
     {
-        $BpmBerekening = new \BPMBerekening\models\BPM_Berekening();
+        $BpmBerekening = new BPM_Berekening();
 
         // personenauto, benzine, 1-1-2009, 102 gr/km
         $BpmBerekening->setSoortAuto("personenauto");
@@ -165,7 +167,7 @@ class TestRequirements0to6 extends PHPUnit_Framework_TestCase
 
     public function testRequirement5_LatereEersteIngebruikname()
     {
-        $BpmBerekening = new \BPMBerekening\models\BPM_Berekening();
+        $BpmBerekening = new BPM_Berekening();
 
         // personenauto, benzine, 1-1-2011, 102 gr/km
         $BpmBerekening->setSoortAuto("personenauto");
@@ -185,7 +187,7 @@ class TestRequirements0to6 extends PHPUnit_Framework_TestCase
 
     public function testRequirement5_LagereCO2Uitstoot()
     {
-        $BpmBerekening = new \BPMBerekening\models\BPM_Berekening();
+        $BpmBerekening = new BPM_Berekening();
 
         // personenauto, benzine, 1-1-2011, 50 gr/km
         $BpmBerekening->setSoortAuto("personenauto");
@@ -209,7 +211,7 @@ class TestRequirements0to6 extends PHPUnit_Framework_TestCase
      */
     public function testRequirement6()
     {
-        $BpmBerekening = new \BPMBerekening\models\BPM_Berekening();
+        $BpmBerekening = new BPM_Berekening();
 
         // personenauto, diesel, 1-1-2009, 91 gr/km
         $BpmBerekening->setSoortAuto("personenauto");

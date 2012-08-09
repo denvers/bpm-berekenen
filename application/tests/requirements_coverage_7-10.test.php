@@ -1,6 +1,9 @@
 <?php
 require_once(dirname(__FILE__) . "/../models/bpm_berekening.php");
 
+use \BPMBerekening\models\motorrijtuig\Personenauto_Geen_Diesel;
+use \BPMBerekening\models\motorrijtuig\Personenauto_Diesel;
+
 /**
  * Deze test class dekt de requirements 11 - 12
  */
@@ -12,7 +15,7 @@ class TestRequirements11to15 extends PHPUnit_Framework_TestCase
      */
     public function testRequirement11()
     {
-        $motorrijtuig = new \BPMBerekening\models\motorrijtuig\Personenauto_Geen_Diesel();
+        $motorrijtuig = new Personenauto_Geen_Diesel();
         $motorrijtuig->setCo2Uitstoot(null);
 
         $this->assertEquals(350, $motorrijtuig->getCo2Uitstoot());
@@ -24,7 +27,7 @@ class TestRequirements11to15 extends PHPUnit_Framework_TestCase
      */
     public function testRequirement12()
     {
-        $motorrijtuig = new \BPMBerekening\models\motorrijtuig\Personenauto_Diesel();
+        $motorrijtuig = new Personenauto_Diesel();
         $motorrijtuig->setCo2Uitstoot(null);
 
         $this->assertEquals(302, $motorrijtuig->getCo2Uitstoot());

@@ -65,7 +65,7 @@ class Home_Controller extends Base_Controller
 
         require_once(dirname(__FILE__) . "/../models/bpm_berekening.php");
 
-        $BPM_Berekening = new BPMBerekening\models\BPM_Berekening();
+        $BPM_Berekening = new \BPMBerekening\models\BPM_Berekening();
         $BPM_Berekening->setBrandstof(Input::get('brandstof'));
         $BPM_Berekening->setCo2Uitstoot(Input::get('co2_uitstoot'));
         $BPM_Berekening->setConsumentenprijs(Input::get('consumentenprijs'));

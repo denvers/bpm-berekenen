@@ -1,6 +1,9 @@
 <?php
 require_once(dirname(__FILE__) . "/../models/koerslijst.php");
 
+use \BPMBerekening\afschrijvingsmethode\Koerslijst;
+use \BPMBerekening\models\motorrijtuig\Personenauto_Diesel;
+
 /**
  * User: dsessink
  * Date: 30-07-12
@@ -13,7 +16,7 @@ class TestKoerslijst extends PHPUnit_Framework_TestCase
      */
     public function testAfschrijving()
     {
-        $Koerslijst = new BPMBerekening\afschrijvingsmethode\Koerslijst();
+        $Koerslijst = new Koerslijst();
 
         $afschrijving = $Koerslijst->berekenAfschrijving(10000, 5000);
         $this->assertEquals($afschrijving, 5000);
@@ -33,7 +36,7 @@ class TestKoerslijst extends PHPUnit_Framework_TestCase
      */
     public function testAfschrijvingsPercentageZonderWaarden()
     {
-        $Koerslijst = new BPMBerekening\afschrijvingsmethode\Koerslijst();
+        $Koerslijst = new Koerslijst();
 
         // Expect an exception als er geen motorrijtuig is gezet
         try {
@@ -63,8 +66,8 @@ class TestKoerslijst extends PHPUnit_Framework_TestCase
     {
         // TODO wat te doen als het afschrijvingsbedrag gelijk is aan de consumentenprijs?
         // misschien kan de PDF van de belastingdienst daar antwoord op geven.
-        $Koerslijst = new BPMBerekening\afschrijvingsmethode\Koerslijst();
-        $motorrijtuig = new \BPMBerekening\models\motorrijtuig\Personenauto_Diesel();
+        $Koerslijst = new Koerslijst();
+        $motorrijtuig = new Personenauto_Diesel();
         $motorrijtuig->setConsumentenprijs(35000);
         $motorrijtuig->getInkoopwaarde(1);
 

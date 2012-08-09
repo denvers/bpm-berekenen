@@ -1,6 +1,8 @@
 <?php
 require_once(dirname(__FILE__) . "/../models/bpm_berekening.php");
 
+use \BPMBerekening\models\BPM_Berekening;
+
 class TestBpmBerekening extends PHPUnit_Framework_TestCase
 {
 
@@ -12,7 +14,7 @@ class TestBpmBerekening extends PHPUnit_Framework_TestCase
         // Verwacht een exception bij het berekenen van de BPM zonder
         // voldoende input.
         try {
-            $BpmBerekening = new \BPMBerekening\models\BPM_Berekening();
+            $BpmBerekening = new BPM_Berekening();
             $BpmBerekening->berekenBPM();
 
             $this->assertTrue(false);
@@ -35,7 +37,7 @@ class TestBpmBerekening extends PHPUnit_Framework_TestCase
      */
     public function testBpmOverCO2UitstootPersonenAutoBenzine()
     {
-        $BpmBerekening = new \BPMBerekening\models\BPM_Berekening();
+        $BpmBerekening = new BPM_Berekening();
 
         $bpm = $BpmBerekening->berekenBpmOverCO2Uitstoot("benzine", 0);
         $this->assertEquals($bpm, 0);
@@ -77,7 +79,7 @@ class TestBpmBerekening extends PHPUnit_Framework_TestCase
      */
     public function testBpmOverCO2UitstootPersonenAutoAardgas()
     {
-        $BpmBerekening = new \BPMBerekening\models\BPM_Berekening();
+        $BpmBerekening = new BPM_Berekening();
 
         $bpm = $BpmBerekening->berekenBpmOverCO2Uitstoot("aardgas", 0);
         $this->assertEquals($bpm, 0);
@@ -119,7 +121,7 @@ class TestBpmBerekening extends PHPUnit_Framework_TestCase
      */
     public function testBpmOverCO2UitstootPersonenAutoLpg()
     {
-        $BpmBerekening = new \BPMBerekening\models\BPM_Berekening();
+        $BpmBerekening = new BPM_Berekening();
 
         $bpm = $BpmBerekening->berekenBpmOverCO2Uitstoot("lpg", 0);
         $this->assertEquals($bpm, 0);
@@ -161,7 +163,7 @@ class TestBpmBerekening extends PHPUnit_Framework_TestCase
      */
     public function testBpmOverCO2UitstootPersonenAutoDiesel()
     {
-        $BpmBerekening = new \BPMBerekening\models\BPM_Berekening();
+        $BpmBerekening = new BPM_Berekening();
 
         $bpm = $BpmBerekening->berekenBpmOverCO2Uitstoot("diesel", 0);
         $this->assertEquals($bpm, 0);
@@ -192,7 +194,7 @@ class TestBpmBerekening extends PHPUnit_Framework_TestCase
      */
     public function testBpmOverNettoCatalogusprijsPersonenAutoBenzine()
     {
-        $BpmBerekening = new \BPMBerekening\models\BPM_Berekening();
+        $BpmBerekening = new BPM_Berekening();
         $BpmBerekening->setSoortAuto("personenauto");
 
         $bpm = $BpmBerekening->berekenBpmOverCatalogusprijs("benzine", 25000, 0);
@@ -230,7 +232,7 @@ class TestBpmBerekening extends PHPUnit_Framework_TestCase
      */
     public function testBpmOverNettoCatalogusprijsPersonenAutoDiesel()
     {
-        $BpmBerekening = new BPMBerekening\models\BPM_Berekening();
+        $BpmBerekening = new BPM_Berekening();
         $BpmBerekening->setSoortAuto("personenauto");
 
         $bpm = $BpmBerekening->berekenBpmOverCatalogusprijs("diesel", 25000, 0);
@@ -264,7 +266,7 @@ class TestBpmBerekening extends PHPUnit_Framework_TestCase
 //    Dan krijgt u een korting op de bpm van € 1.000.
     public function testEuro6NormDieselPersonenAuto()
     {
-        $BpmBerekening = new \BPMBerekening\models\BPM_Berekening();
+        $BpmBerekening = new BPM_Berekening();
 
         $BpmBerekening->setSoortAuto("personenauto");
         $BpmBerekening->setBrandstof("diesel");
@@ -285,15 +287,17 @@ class TestBpmBerekening extends PHPUnit_Framework_TestCase
         $this->assertEquals(4058, $berekend['koerslijst']['netto_bpm']);
     }
 
-    // FIXME http://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/prive/auto_en_vervoer/belastingen_op_auto_en_motor/belasting_van_personenautos_en_motorrijwielen_bpm/waarover_bpm_berekenen/bpm_tarief_co_2_uitstoot_personenauto
+    // TODO http://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/prive/auto_en_vervoer/belastingen_op_auto_en_motor/belasting_van_personenautos_en_motorrijwielen_bpm/waarover_bpm_berekenen/bpm_tarief_co_2_uitstoot_personenauto
     public function testBpmBerekeningKampeerauto()
     {
     }
 
+    // TODO
     public function testBpmBerekeningBestelauto()
     {
     }
 
+    // TODO
     public function testBpmBerekeningMotorfiets()
     {
     }
@@ -303,7 +307,7 @@ class TestBpmBerekening extends PHPUnit_Framework_TestCase
      */
     public function testBrutoBpm()
     {
-        $BpmBerekening = new BPMBerekening\models\BPM_Berekening();
+        $BpmBerekening = new BPM_Berekening();
 
         $brutobpm = $BpmBerekening->berekenBrutoBpm(0, 0);
         $this->assertEquals($brutobpm, 0);
@@ -326,7 +330,7 @@ class TestBpmBerekening extends PHPUnit_Framework_TestCase
      */
     public function testTeBetalenBpm()
     {
-        $BpmBerekening = new \BPMBerekening\models\BPM_Berekening();
+        $BpmBerekening = new BPM_Berekening();
 
         $BpmBerekening->setSoortAuto("personenauto");
         $BpmBerekening->setBrandstof("diesel");
@@ -344,7 +348,7 @@ class TestBpmBerekening extends PHPUnit_Framework_TestCase
         $this->assertTrue(isset($berekend['forfaitaire_tabel']));
 //        $this->assertTrue( isset($berekend['taxatierapport']) );
 
-        // TODO
+        // TODO bpm berekening volgens koerslijst controleren
 
         // koerslijst
 //        $this->assertEquals( $berekend['koerslijst']['afschrijving'], 21700 );

@@ -10,6 +10,9 @@ require_once( dirname(__FILE__) . "/motorrijtuig.php" );
  */
 class Personenauto_Geen_Diesel extends Motorrijtuig
 {
+    /**
+     * @param mixed $co2_uitstoot
+     */
     public function setCo2Uitstoot( $co2_uitstoot )
     {
         // Requirement 11:
@@ -20,6 +23,8 @@ class Personenauto_Geen_Diesel extends Motorrijtuig
         }
         else
         {
+            $co2_uitstoot = intval($co2_uitstoot);
+
             if ( $co2_uitstoot >= 0 )
             {
                 $this->co2_uitstoot = $co2_uitstoot;
