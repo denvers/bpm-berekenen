@@ -1,7 +1,5 @@
 <?php
-require_once(dirname(__FILE__) . "/../models/BPM_Berekening.php");
-
-use \BPMBerekening\models\BPM_Berekening;
+use \BPMBerekening\BPM_Berekening;
 
 /**
  * Deze test class dekt de requirements 1 t/m 6

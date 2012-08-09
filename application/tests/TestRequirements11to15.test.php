@@ -1,8 +1,6 @@
 <?php
-require_once(dirname(__FILE__) . "/../models/BPM_Berekening.php");
-
-use \BPMBerekening\models\motorrijtuig\Personenauto_Geen_Diesel;
-use \BPMBerekening\models\motorrijtuig\Personenauto_Diesel;
+use \BPMBerekening\Motorrijtuig\Personenauto_Geen_Diesel;
+use \BPMBerekening\Motorrijtuig\Personenauto_Diesel;
 
 /**
  * Deze test class dekt de requirements 11 - 12

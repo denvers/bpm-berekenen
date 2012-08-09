@@ -8,7 +8,7 @@ namespace BPMBerekening\Afschrijvingsmethode;
  *
  * http://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/prive/auto_en_vervoer/belastingen_op_auto_en_motor/belasting_van_personenautos_en_motorrijwielen_bpm/waarover_bpm_berekenen/afschrijving_op_basis_van_koerslijst_taxatierapport_of_forfaitaire_tabel/afschrijving_op_basis_van_forfaitaire_tabel
  */
-use Exception;
+use \Exception;
 
 class Forfaitaire_Tabel implements IAfschrijvingsmethode
 {
