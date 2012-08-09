@@ -1,5 +1,5 @@
 <?php
-namespace BPMBerekening\models\brandstofsoort;
+namespace BPMBerekening\Brandstofsoort;
 
 /**
  * User: dsessink

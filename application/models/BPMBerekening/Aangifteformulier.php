@@ -1,4 +1,6 @@
 <?php
+namespace BPMBerekening;
+
 /**
  * User: dsessink
  * Date: 25-07-12

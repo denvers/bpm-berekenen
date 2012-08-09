@@ -1,7 +1,7 @@
 <?php
 namespace BPMBerekening\models\motorrijtuig;
 
-require_once( dirname(__FILE__) . "/motorrijtuig.php" );
+require_once(dirname(__FILE__) . "/motorrijtuig.php");
 
 /**
  * User: dsessink
