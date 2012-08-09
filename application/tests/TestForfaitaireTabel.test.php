@@ -1,7 +1,6 @@
 <?php
-use \DateTime;
-use \BPMBerekening\BPM_Berekening;
-use \BPMBerekening\Afschrijvingsmethode\Forfaitaire_Tabel;
+use BPMBerekening\BPMBerekening;
+use BPMBerekening\Afschrijvingsmethode\ForfaitaireTabel;
 
 /**
  * @info http://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/prive/auto_en_vervoer/belastingen_op_auto_en_motor/belasting_van_personenautos_en_motorrijwielen_bpm/waarover_bpm_berekenen/afschrijving_op_basis_van_koerslijst_taxatierapport_of_forfaitaire_tabel/afschrijving_op_basis_van_forfaitaire_tabel
@@ -42,7 +41,7 @@ class TestForfaitaireTabel extends PHPUnit_Framework_TestCase
         // Bruto bpm op datum aangifte: 13.313 EUR
         // Te betalen bpm (netto): 9.008 EUR
 
-        $BPM_berekening = new BPM_Berekening();
+        $BPM_berekening = new BPMBerekening();
         $BPM_berekening->setSoortAuto("personenauto");
         $BPM_berekening->setBrandstof("diesel");
         $BPM_berekening->setDatum(new DateTime("26-04-2011"));
@@ -70,7 +69,7 @@ class TestForfaitaireTabel extends PHPUnit_Framework_TestCase
         $datetime_eerste_ingebruikname = new DateTime("31-01-2000");
         $datetime_eerste_tenaamstelling_nl = new DateTime("28-02-2000");
 
-        $forfaitaire_tabel = new Forfaitaire_Tabel();
+        $forfaitaire_tabel = new ForfaitaireTabel();
 
         $leeftijd_in_maanden = $forfaitaire_tabel->berekenLeeftijdInMaanden($datetime_eerste_ingebruikname, $datetime_eerste_tenaamstelling_nl);
         $this->assertEquals(1, $leeftijd_in_maanden);
@@ -85,7 +84,7 @@ class TestForfaitaireTabel extends PHPUnit_Framework_TestCase
         $datetime_eerste_ingebruikname = new DateTime("31-01-2000");
         $datetime_eerste_tenaamstelling_nl = new DateTime("01-03-2000");
 
-        $forfaitaire_tabel = new Forfaitaire_Tabel();
+        $forfaitaire_tabel = new ForfaitaireTabel();
 
         $leeftijd_in_maanden = $forfaitaire_tabel->berekenLeeftijdInMaanden($datetime_eerste_ingebruikname, $datetime_eerste_tenaamstelling_nl);
         $this->assertEquals(2, $leeftijd_in_maanden);
@@ -96,7 +95,7 @@ class TestForfaitaireTabel extends PHPUnit_Framework_TestCase
      */
     public function testRequirement44()
     {
-        $BPM_berekening = new BPM_Berekening();
+        $BPM_berekening = new BPMBerekening();
         $BPM_berekening->setSoortAuto("bestelauto");
         $BPM_berekening->setBrandstof("diesel");
         $BPM_berekening->setDatum(new DateTime("01-01-2005"));
@@ -119,7 +118,7 @@ class TestForfaitaireTabel extends PHPUnit_Framework_TestCase
         // Voor de overige 2 volle maanden en de 3e gedeeltelijke maand is de afschrijving 3 x 1,444%.
         // Dus: 28% + (3 x 1,444%) = 32,332%.
 
-        $BPM_berekening = new BPM_Berekening();
+        $BPM_berekening = new BPMBerekening();
         $BPM_berekening->setSoortAuto("personenauto");
         $BPM_berekening->setBrandstof("benzine");
         $BPM_berekening->setDatum(new DateTime("08-04-2012"));

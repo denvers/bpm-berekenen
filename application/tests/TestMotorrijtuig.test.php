@@ -1,6 +1,6 @@
 <?php
 
-// TODO test motorrijtuig methods
+// TODO test Motorrijtuig methods
 class TestMotorrijtuig extends PHPUnit_Framework_TestCase {
 
     /**

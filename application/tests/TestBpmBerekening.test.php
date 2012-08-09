@@ -1,5 +1,5 @@
 <?php
-use \BPMBerekening\BPM_Berekening;
+use BPMBerekening\BPMBerekening;
 
 class TestBpmBerekening extends PHPUnit_Framework_TestCase
 {
@@ -12,7 +12,7 @@ class TestBpmBerekening extends PHPUnit_Framework_TestCase
         // Verwacht een exception bij het berekenen van de BPM zonder
         // voldoende input.
         try {
-            $BpmBerekening = new BPM_Berekening();
+            $BpmBerekening = new BPMBerekening();
             $BpmBerekening->berekenBPM();
 
             $this->assertTrue(false);
@@ -35,7 +35,7 @@ class TestBpmBerekening extends PHPUnit_Framework_TestCase
      */
     public function testBpmOverCO2UitstootPersonenAutoBenzine()
     {
-        $BpmBerekening = new BPM_Berekening();
+        $BpmBerekening = new BPMBerekening();
 
         $bpm = $BpmBerekening->berekenBpmOverCO2Uitstoot("benzine", 0);
         $this->assertEquals($bpm, 0);
@@ -77,7 +77,7 @@ class TestBpmBerekening extends PHPUnit_Framework_TestCase
      */
     public function testBpmOverCO2UitstootPersonenAutoAardgas()
     {
-        $BpmBerekening = new BPM_Berekening();
+        $BpmBerekening = new BPMBerekening();
 
         $bpm = $BpmBerekening->berekenBpmOverCO2Uitstoot("aardgas", 0);
         $this->assertEquals($bpm, 0);
@@ -119,7 +119,7 @@ class TestBpmBerekening extends PHPUnit_Framework_TestCase
      */
     public function testBpmOverCO2UitstootPersonenAutoLpg()
     {
-        $BpmBerekening = new BPM_Berekening();
+        $BpmBerekening = new BPMBerekening();
 
         $bpm = $BpmBerekening->berekenBpmOverCO2Uitstoot("lpg", 0);
         $this->assertEquals($bpm, 0);
@@ -161,7 +161,7 @@ class TestBpmBerekening extends PHPUnit_Framework_TestCase
      */
     public function testBpmOverCO2UitstootPersonenAutoDiesel()
     {
-        $BpmBerekening = new BPM_Berekening();
+        $BpmBerekening = new BPMBerekening();
 
         $bpm = $BpmBerekening->berekenBpmOverCO2Uitstoot("diesel", 0);
         $this->assertEquals($bpm, 0);
@@ -192,7 +192,7 @@ class TestBpmBerekening extends PHPUnit_Framework_TestCase
      */
     public function testBpmOverNettoCatalogusprijsPersonenAutoBenzine()
     {
-        $BpmBerekening = new BPM_Berekening();
+        $BpmBerekening = new BPMBerekening();
         $BpmBerekening->setSoortAuto("personenauto");
 
         $bpm = $BpmBerekening->berekenBpmOverCatalogusprijs("benzine", 25000, 0);
@@ -230,7 +230,7 @@ class TestBpmBerekening extends PHPUnit_Framework_TestCase
      */
     public function testBpmOverNettoCatalogusprijsPersonenAutoDiesel()
     {
-        $BpmBerekening = new BPM_Berekening();
+        $BpmBerekening = new BPMBerekening();
         $BpmBerekening->setSoortAuto("personenauto");
 
         $bpm = $BpmBerekening->berekenBpmOverCatalogusprijs("diesel", 25000, 0);
@@ -264,7 +264,7 @@ class TestBpmBerekening extends PHPUnit_Framework_TestCase
 //    Dan krijgt u een korting op de bpm van € 1.000.
     public function testEuro6NormDieselPersonenAuto()
     {
-        $BpmBerekening = new BPM_Berekening();
+        $BpmBerekening = new BPMBerekening();
 
         $BpmBerekening->setSoortAuto("personenauto");
         $BpmBerekening->setBrandstof("diesel");
@@ -305,7 +305,7 @@ class TestBpmBerekening extends PHPUnit_Framework_TestCase
      */
     public function testBrutoBpm()
     {
-        $BpmBerekening = new BPM_Berekening();
+        $BpmBerekening = new BPMBerekening();
 
         $brutobpm = $BpmBerekening->berekenBrutoBpm(0, 0);
         $this->assertEquals($brutobpm, 0);
@@ -329,7 +329,7 @@ class TestBpmBerekening extends PHPUnit_Framework_TestCase
      */
     public function testTeBetalenBpm()
     {
-        $BpmBerekening = new BPM_Berekening();
+        $BpmBerekening = new BPMBerekening();
 
         $BpmBerekening->setSoortAuto("personenauto");
         $BpmBerekening->setBrandstof("diesel");

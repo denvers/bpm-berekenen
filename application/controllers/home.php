@@ -63,9 +63,8 @@ class Home_Controller extends Base_Controller
 //            [SQLiteManager_currentLangue] => 2
 //        )
 
-        require_once(dirname(__FILE__) . "/../models/BPM_Berekening.php");
 
-        $BPM_Berekening = new \BPMBerekening\models\BPM_Berekening();
+        $BPM_Berekening = new \BPMBerekening\BPMBerekening();
         $BPM_Berekening->setBrandstof(Input::get('brandstof'));
         $BPM_Berekening->setCo2Uitstoot(Input::get('co2_uitstoot'));
         $BPM_Berekening->setConsumentenprijs(Input::get('consumentenprijs'));

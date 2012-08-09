@@ -1,7 +1,7 @@
 <?php
 namespace BPMBerekening\Motorrijtuig;
 
-use \DateTime;
+use DateTime;
 
 /**
  * User: dsessink

@@ -78,6 +78,10 @@ Autoloader::directories(array(
 	path('app').'libraries',
 ));
 
+Autoloader::namespaces(array(
+    'BPMBerekening' => path('app').'models/BPMBerekening'
+));
+
 /*
 |--------------------------------------------------------------------------
 | Laravel View Loader

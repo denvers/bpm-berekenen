@@ -1,15 +1,19 @@
 <?php
 namespace BPMBerekening;
 
+use Laravel\Log;
+
 /**
  * User: dsessink
  * Date: 25-07-12
  * Time: 14:11
  */
-class BPM_Berekening_Historisch
+class BpmBerekeningHistorisch
 {
     /**
      * @param \BpmBerekening\Motorrijtuig\Motorrijtuig $motorrijtuig
+     * @throws \Exception
+     * @return float|int
      */
     public function berekenBpmOverCatalogusprijs($motorrijtuig)
     {
@@ -155,29 +159,29 @@ class BPM_Berekening_Historisch
     public function berekenBpmOvercatalogusprijsJanuari1993tmApril2000($motorrijtuig)
     {
         // Personenauto
-        if ( get_class($motorrijtuig) == "BPMBerekening\models\motorrijtuig\Personenauto_Geen_Diesel" )
+        if ( get_class($motorrijtuig) == "BPMBerekening\Motorrijtuig\PersonenautoGeenDiesel" )
         {
             $bpm_tarief = 45.2;
             $brandstofkorting = 1540;
         }
-        elseif ( get_class($motorrijtuig) == "BPMBerekening\models\motorrijtuig\Personenauto_Diesel" )
+        elseif ( get_class($motorrijtuig) == "BPMBerekening\Motorrijtuig\PersonenautoDiesel" )
         {
             $bpm_tarief = 45.2;
             $brandstofkorting = 961;
         }
         // Bestelauto
-        elseif ( get_class($motorrijtuig) == "BPMBerekening\models\motorrijtuig\Bestelauto_Geen_Diesel" )
+        elseif ( get_class($motorrijtuig) == "BPMBerekening\Motorrijtuig\BestelautoGeenDiesel" )
         {
             //bestelauto met benzinemotor: geen bpm
             return 0;
         }
-        elseif ( get_class($motorrijtuig) == "BPMBerekening\models\motorrijtuig\Bestelauto_Diesel" )
+        elseif ( get_class($motorrijtuig) == "BPMBerekening\Motorrijtuig\BestelautoDiesel" )
         {
             //bestelauto met dieselmotor: geen bpm
             return 0;
         }
         // Motorfiets
-        elseif ( get_class($motorrijtuig) == "BPMBerekening\models\motorrijtuig\Motorfiets" )
+        elseif ( get_class($motorrijtuig) == "BPMBerekening\Motorrijtuig\Motorfiets" )
         {
 //            requirement 106: netto-catalogusprijs tot en met 2133 EUR: 10,2 % van netto-catalogusprijs
 //            requirement 107: netto-catalogusprijs vanaf 2134 EUR: 20,7% van netto-catalogusprijs

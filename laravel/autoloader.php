@@ -55,6 +55,7 @@ class Autoloader {
 			return class_alias(static::$aliases[$class], $class);
 		}
 
+
 		// All classes in Laravel are staticly mapped. There is no crazy search
 		// routine that digs through directories. It's just a simple array of
 		// class to file path maps for ultra-fast file loading.

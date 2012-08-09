@@ -6,11 +6,11 @@ namespace BPMBerekening\Afschrijvingsmethode;
  * Date: 25-07-12
  * Time: 23:24
  *
- * http://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/prive/auto_en_vervoer/belastingen_op_auto_en_motor/belasting_van_personenautos_en_motorrijwielen_bpm/waarover_bpm_berekenen/afschrijving_op_basis_van_koerslijst_taxatierapport_of_forfaitaire_tabel/afschrijving_op_basis_van_forfaitaire_tabel
+ * http://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/prive/auto_en_vervoer/belastingen_op_auto_en_motor/belasting_van_personenautos_en_motorrijwielen_bpm/waarover_bpm_berekenen/afschrijving_op_basis_van_koerslijst_taxatierapport_of_ForfaitaireTabel/afschrijving_op_basis_van_forfaitaire_tabel
  */
-use \Exception;
+use Exception;
 
-class Forfaitaire_Tabel implements IAfschrijvingsmethode
+class ForfaitaireTabel implements IAfschrijvingsmethode
 {
     /**
      * @var \BPMBerekening\Motorrijtuig\Motorrijtuig
@@ -25,7 +25,7 @@ class Forfaitaire_Tabel implements IAfschrijvingsmethode
     public function setMotorrijtuig($motorrijtuig)
     {
         if (!class_basename($motorrijtuig) == "Motorrijtuig") {
-            throw new Exception("Invalid motorrijtuig given: " . class_basename($motorrijtuig));
+            throw new Exception("Invalid Motorrijtuig given: " . class_basename($motorrijtuig));
         }
 
         $this->motorrijtuig = $motorrijtuig;
@@ -42,8 +42,8 @@ class Forfaitaire_Tabel implements IAfschrijvingsmethode
 
         // Requirement 44: Voor een bestelauto geldt een afwijkende regeling. Het afschrijvingspercentage is na 5 jaar 100%.
         if (
-            get_class($this->motorrijtuig) == "BPMBerekening\models\motorrijtuig\Bestelauto_Diesel" ||
-            get_class($this->motorrijtuig) == "BPMBerekening\models\motorrijtuig\Bestelauto_Geen_Diesel"
+            get_class($this->motorrijtuig) == "BPMBerekening\Motorrijtuig\BestelautoDiesel" ||
+            get_class($this->motorrijtuig) == "BPMBerekening\Motorrijtuig\BestelautoGeenDiesel"
         ) {
             $verschil = $datum_eerste_ingebruikname->diff($datum_eerste_tenaamstelling_nederland);
             if ($verschil->y >= 5) {

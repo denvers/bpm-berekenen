@@ -1,8 +1,8 @@
 <?php
 namespace BPMBerekening\Afschrijvingsmethode;
 
-use \Exception;
-use \Laravel\Log;
+use Exception;
+use Laravel\Log;
 
 /**
  * User: dsessink
@@ -25,7 +25,7 @@ class Koerslijst implements IAfschrijvingsmethode
     {
         if ( !class_basename($motorrijtuig) == "Motorrijtuig" )
         {
-            throw new Exception("Invalid motorrijtuig given: ".class_basename($motorrijtuig));
+            throw new Exception("Invalid Motorrijtuig given: ".class_basename($motorrijtuig));
         }
 
         $this->motorrijtuig = $motorrijtuig;
@@ -43,7 +43,7 @@ class Koerslijst implements IAfschrijvingsmethode
         // die inkoopwaarde kan wel weg
         if ( !isset($this->motorrijtuig) )
         {
-            $ex = new Exception("Geen motorrijtuig object gevonden voor het berekenen van het afschrijvingspercentage.");
+            $ex = new Exception("Geen Motorrijtuig object gevonden voor het berekenen van het afschrijvingspercentage.");
             Log::exception($ex);
             throw $ex;
         }

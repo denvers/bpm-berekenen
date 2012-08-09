@@ -1,6 +1,6 @@
 <?php
-use \BPMBerekening\Afschrijvingsmethode\Koerslijst;
-use \BPMBerekening\Motorrijtuig\Personenauto_Diesel;
+use BPMBerekening\Afschrijvingsmethode\Koerslijst;
+use BPMBerekening\Motorrijtuig\PersonenautoDiesel;
 
 /**
  * User: dsessink
@@ -10,7 +10,7 @@ use \BPMBerekening\Motorrijtuig\Personenauto_Diesel;
 class TestKoerslijst extends PHPUnit_Framework_TestCase
 {
     /**
-     * Test de afschrijving van een motorrijtuig
+     * Test de afschrijving van een Motorrijtuig
      */
     public function testAfschrijving()
     {
@@ -36,7 +36,7 @@ class TestKoerslijst extends PHPUnit_Framework_TestCase
     {
         $Koerslijst = new Koerslijst();
 
-        // Expect an exception als er geen motorrijtuig is gezet
+        // Expect an exception als er geen Motorrijtuig is gezet
         try {
             $Koerslijst->berekenAfschrijvingsPercentage(21700, 35000);
             $this->assertTrue(false);
@@ -49,12 +49,12 @@ class TestKoerslijst extends PHPUnit_Framework_TestCase
     // TODO
     public function testAfschrijvingsPercentageNormaal()
     {
-//        $Koerslijst = new BPMBerekening\afschrijvingsmethode\Koerslijst();
-//        $motorrijtuig = new \BPMBerekening\models\motorrijtuig\Motorrijtuig();
-//        $motorrijtuig->setConsumentenprijs(35000);
-//        $motorrijtuig->getInkoopwaarde(15000);
+//        $Koerslijst = new BPMBerekening\Afschrijvingsmethode\Koerslijst();
+//        $Motorrijtuig = new \BPMBerekening\Motorrijtuig\Motorrijtuig();
+//        $Motorrijtuig->setConsumentenprijs(35000);
+//        $Motorrijtuig->getInkoopwaarde(15000);
 //
-//        $Koerslijst->setMotorrijtuig($motorrijtuig);
+//        $Koerslijst->setMotorrijtuig($Motorrijtuig);
 //
 //        $afschrijvingspercentage = $Koerslijst->berekenAfschrijvingsPercentage();
 //        $this->assertEquals($afschrijvingspercentage, 62);
@@ -65,7 +65,7 @@ class TestKoerslijst extends PHPUnit_Framework_TestCase
         // TODO wat te doen als het afschrijvingsbedrag gelijk is aan de consumentenprijs?
         // misschien kan de PDF van de belastingdienst daar antwoord op geven.
         $Koerslijst = new Koerslijst();
-        $motorrijtuig = new Personenauto_Diesel();
+        $motorrijtuig = new PersonenautoDiesel();
         $motorrijtuig->setConsumentenprijs(35000);
         $motorrijtuig->getInkoopwaarde(1);
 
