@@ -63,7 +63,7 @@ class Home_Controller extends Base_Controller
 //            [SQLiteManager_currentLangue] => 2
 //        )
 
-        require_once(dirname(__FILE__) . "/../models/bpm_berekening.php");
+        require_once(dirname(__FILE__) . "/../models/BPM_Berekening.php");
 
         $BPM_Berekening = new \BPMBerekening\models\BPM_Berekening();
         $BPM_Berekening->setBrandstof(Input::get('brandstof'));

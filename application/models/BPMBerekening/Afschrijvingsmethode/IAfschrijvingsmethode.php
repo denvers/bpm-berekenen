@@ -1,5 +1,5 @@
 <?php
-namespace BPMBerekening\afschrijvingsmethode;
+namespace BPMBerekening\Afschrijvingsmethode;
 
 /**
  * User: dsessink
@@ -10,7 +10,7 @@ interface IAfschrijvingsmethode
 {
     /**
      * @abstract
-     * @param Motorrijtuig $motorrijtuig
+     * @param \BPMBerekening\Motorrijtuig\Motorrijtuig $motorrijtuig
      * @return mixed
      */
     public function setMotorrijtuig($motorrijtuig);

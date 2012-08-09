@@ -1,11 +1,6 @@
 <?php
 namespace BPMBerekening;
 
-require_once(dirname(__FILE__) . "/../models/forfaitaire_tabel.php");
-require_once(dirname(__FILE__) . "/../models/koerslijst.php");
-
-use DateTime;
-
 /**
  * User: dsessink
  * Date: 25-07-12
@@ -13,7 +8,6 @@ use DateTime;
  */
 class BPM_Berekening_Historisch
 {
-
     /**
      * @param \BpmBerekening\Motorrijtuig\Motorrijtuig $motorrijtuig
      */
@@ -152,7 +146,7 @@ class BPM_Berekening_Historisch
     }
 
     /**
-     * @param \BpmBerekening\models\motorrijtuig\Motorrijtuig $motorrijtuig
+     * @param \BpmBerekening\Motorrijtuig\Motorrijtuig $motorrijtuig
      *
      * ingebruikname in periode van 1 januari 1993 tot en met 30 juni 1997:
      * ingebruikname in periode van 1 juli 1997 tot en met 31 december 1997:

@@ -1,11 +1,10 @@
 <?php
 namespace BPMBerekening;
 
-require_once(dirname(__FILE__) . "/../models/bpm_berekening_historisch.php");
-require_once(dirname(__FILE__) . "/../models/forfaitaire_tabel.php");
-require_once(dirname(__FILE__) . "/../models/koerslijst.php");
-
-use DateTime;
+use \DateTime;
+use \BPMBerekening\BPM_Berekening_Historisch;
+use \BPMBerekening\Afschrijvingsmethode\Forfaitaire_Tabel;
+use \BPMBerekening\Afschrijvingsmethode\Koerslijst;
 use \BPMBerekening\Motorrijtuig\Personenauto_Diesel;
 use \BPMBerekening\Motorrijtuig\Personenauto_Geen_Diesel;
 use \BPMBerekening\Motorrijtuig\Kampeerauto_Geen_Diesel;
@@ -231,7 +230,7 @@ class BPM_Berekening
 
     /**
      * Dekt requirement 1-6
-     * @param \BPMBerekening\Motorrijtuig $motorrijtuig
+     * @param \BPMBerekening\Motorrijtuig\Motorrijtuig $motorrijtuig
      * @return bool
      */
     private function geenBpmVoorMotorrijtuigOpBasisVanCO2Uitstoot($motorrijtuig)
@@ -353,7 +352,7 @@ class BPM_Berekening
     /**
      * Volledige BPM berekening volgens koerslijst
      *
-     * @param \BPMBerekening\models\motorrijtuig\Motorrijtuig $motorrijtuig
+     * @param \BPMBerekening\Motorrijtuig\Motorrijtuig $motorrijtuig
      */
     private function berekenBpmVolgensKoerslijst($motorrijtuig)
     {
@@ -421,12 +420,12 @@ class BPM_Berekening
 
         $bpm_over_c02 = $this->berekenBpmOverCO2Uitstoot($this->brandstof, $this->co2_uitstoot);
 
-        $bpm_berekening_historisch = new \BPMBerekening\models\BPM_Berekening_Historisch();
+        $bpm_berekening_historisch = new BPM_Berekening_Historisch();
         $bpm_over_catalogusprijs = $bpm_berekening_historisch->berekenBpmOverCatalogusprijs($motorrijtuig);
 
         $bruto_bpm = $this->berekenBrutoBpm($bpm_over_c02, $bpm_over_catalogusprijs);
 
-        $Koerslijst = new \BPMBerekening\afschrijvingsmethode\Koerslijst();
+        $Koerslijst = new Koerslijst();
         $Koerslijst->setMotorrijtuig($motorrijtuig);
         $afschrijvingspercentage = $Koerslijst->berekenAfschrijvingspercentage($this->datum);
 

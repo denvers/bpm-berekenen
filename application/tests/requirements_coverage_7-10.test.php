@@ -1,5 +1,5 @@
 <?php
-require_once(dirname(__FILE__) . "/../models/bpm_berekening.php");
+require_once(dirname(__FILE__) . "/../models/BPM_Berekening.php");
 
 use \BPMBerekening\models\motorrijtuig\Personenauto_Geen_Diesel;
 use \BPMBerekening\models\motorrijtuig\Personenauto_Diesel;
