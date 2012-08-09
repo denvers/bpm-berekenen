@@ -1,7 +1,5 @@
 <?php
-require_once(dirname(__FILE__) . "/../models/BPM_Berekening.php");
-
-use \BPMBerekening\models\BPM_Berekening;
+use \BPMBerekening\BPM_Berekening;
 
 class TestBpmBerekening extends PHPUnit_Framework_TestCase
 {
@@ -327,6 +325,7 @@ class TestBpmBerekening extends PHPUnit_Framework_TestCase
 
     /**
      * Test de netto bpm berekening
+     * TODO bpm berekening volgens koerslijst controleren
      */
     public function testTeBetalenBpm()
     {
@@ -347,8 +346,6 @@ class TestBpmBerekening extends PHPUnit_Framework_TestCase
         $this->assertTrue(isset($berekend['koerslijst']));
         $this->assertTrue(isset($berekend['forfaitaire_tabel']));
 //        $this->assertTrue( isset($berekend['taxatierapport']) );
-
-        // TODO bpm berekening volgens koerslijst controleren
 
         // koerslijst
 //        $this->assertEquals( $berekend['koerslijst']['afschrijving'], 21700 );

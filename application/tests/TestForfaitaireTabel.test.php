@@ -1,8 +1,7 @@
 <?php
-require_once(dirname(__FILE__) . "/../models/forfaitaire_tabel.php");
-
-use \BPMBerekening\models\BPM_Berekening;
-use \BPMBerekening\afschrijvingsmethode\Forfaitaire_Tabel;
+use \DateTime;
+use \BPMBerekening\BPM_Berekening;
+use \BPMBerekening\Afschrijvingsmethode\Forfaitaire_Tabel;
 
 /**
  * @info http://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/prive/auto_en_vervoer/belastingen_op_auto_en_motor/belasting_van_personenautos_en_motorrijwielen_bpm/waarover_bpm_berekenen/afschrijving_op_basis_van_koerslijst_taxatierapport_of_forfaitaire_tabel/afschrijving_op_basis_van_forfaitaire_tabel

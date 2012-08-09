@@ -1,8 +1,6 @@
 <?php
-require_once(dirname(__FILE__) . "/../models/koerslijst.php");
-
-use \BPMBerekening\afschrijvingsmethode\Koerslijst;
-use \BPMBerekening\models\motorrijtuig\Personenauto_Diesel;
+use \BPMBerekening\Afschrijvingsmethode\Koerslijst;
+use \BPMBerekening\Motorrijtuig\Personenauto_Diesel;
 
 /**
  * User: dsessink
@@ -48,9 +46,9 @@ class TestKoerslijst extends PHPUnit_Framework_TestCase
         }
     }
 
+    // TODO
     public function testAfschrijvingsPercentageNormaal()
     {
-        // TODO
 //        $Koerslijst = new BPMBerekening\afschrijvingsmethode\Koerslijst();
 //        $motorrijtuig = new \BPMBerekening\models\motorrijtuig\Motorrijtuig();
 //        $motorrijtuig->setConsumentenprijs(35000);
