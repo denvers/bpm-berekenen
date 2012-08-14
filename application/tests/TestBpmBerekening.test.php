@@ -3,6 +3,45 @@ use BPMBerekening\BPMBerekening;
 
 class TestBpmBerekening extends PHPUnit_Framework_TestCase
 {
+    // TODO setSoortAuto
+    public function testSoortAutoPersonenauto() {
+        $this->assertTrue(false);
+    }
+
+    // TODO
+    public function testSoortAutoKampeerauto() {
+        $this->assertTrue(false);
+    }
+
+    // TODO
+    public function testSoortAutoBestelauto() {
+        $this->assertTrue(false);
+    }
+
+    // TODO
+    public function testSoortAutoMotorfiets() {
+        $this->assertTrue(false);
+    }
+
+    // getMotorrijtuig
+    public function testGetMotorrijtuigShouldReturnPersonenauto() {
+        $this->assertTrue(false);
+    }
+
+    // TODO
+    public function testGetMotorrijtuigShouldReturnKampeerauto() {
+        $this->assertTrue(false);
+    }
+
+    // TODO
+    public function testGetMotorrijtuigShouldReturnBestelauto() {
+        $this->assertTrue(false);
+    }
+
+    // TODO
+    public function testGetMotorrijtuigShouldReturnMotorfiets() {
+        $this->assertTrue(false);
+    }
 
     /**
      * Test de bpm berekening met onvoldoende input

@@ -86,6 +86,14 @@ class BPMBerekening
     }
 
     /**
+     * @return string
+     */
+    private function getBrandstof()
+    {
+        return $this->brandstof;
+    }
+
+    /**
      * @param int $co2_uitstoot
      */
     public function setCo2Uitstoot($co2_uitstoot)
@@ -134,6 +142,14 @@ class BPMBerekening
     }
 
     /**
+     * @param boolean $euro6_norm
+     */
+    public function setEuro6Norm($euro6_norm)
+    {
+        $this->euro6_norm = $euro6_norm;
+    }
+
+    /**
      * @param string $soort_auto
      */
     public function setSoortAuto($soort_auto)
@@ -159,6 +175,8 @@ class BPMBerekening
                 throw new \Exception("Onbekend soort auto gedetecteerd.");
                 break;
         }
+
+        return true;
     }
 
     /**
@@ -167,14 +185,6 @@ class BPMBerekening
     private function getSoortAuto()
     {
         return $this->soort_auto;
-    }
-
-    /**
-     * @return string
-     */
-    private function getBrandstof()
-    {
-        return $this->brandstof;
     }
 
     /**
@@ -680,13 +690,5 @@ class BPMBerekening
     private function output($msg)
     {
         \Laravel\Log::info($msg);
-    }
-
-    /**
-     * @param boolean $euro6_norm
-     */
-    public function setEuro6Norm($euro6_norm)
-    {
-        $this->euro6_norm = $euro6_norm;
     }
 }
