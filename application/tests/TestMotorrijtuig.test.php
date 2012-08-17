@@ -3,7 +3,9 @@ use BPMBerekening\Motorrijtuig\Motorfiets;
 
 class TestMotorrijtuig extends PHPUnit_Framework_TestCase
 {
-
+    /**
+     * @var Motorfiets
+     */
     var $motorrijtuig;
 
     protected function setUp()
@@ -40,13 +42,85 @@ class TestMotorrijtuig extends PHPUnit_Framework_TestCase
         $this->assertEquals(0, $this->motorrijtuig->getInkoopwaarde());
     }
 
-    // TODO co2 uitstoot
+    // CO2 uitstoot
+    public function testCo2UitstootShouldBe0OrAbove()
+    {
+        $this->motorrijtuig->setCo2Uitstoot(0);
+        $this->assertEquals(0, $this->motorrijtuig->getCo2Uitstoot());
 
-    // TODO consumentenprijs
+        $this->motorrijtuig->setCo2Uitstoot(100);
+        $this->assertEquals(100, $this->motorrijtuig->getCo2Uitstoot());
+    }
 
-    // TODO netto catalogusprijs
+    public function testCo2UitstootNegativeShouldBecome0()
+    {
+        $this->motorrijtuig->setCo2Uitstoot(-100);
+        $this->assertEquals(0, $this->motorrijtuig->getCo2Uitstoot());
+    }
 
-    // TODO datum eerste ingebruikname
+    public function testCo2UitstootFloatShouldBecomeInt()
+    {
+        $this->motorrijtuig->setCo2Uitstoot(100.10);
+        $this->assertEquals(100, $this->motorrijtuig->getCo2Uitstoot());
 
-    // TODO datum eerste toelating
+        $this->motorrijtuig->setCo2Uitstoot(100.50);
+        $this->assertEquals(101, $this->motorrijtuig->getCo2Uitstoot());
+    }
+
+    // Consumentenprijs
+    public function testConsumentenprijsShouldBecomeIntegerIfFloatPassed()
+    {
+        $this->motorrijtuig->setConsumentenprijs(10000.10);
+        $this->assertEquals(10000, $this->motorrijtuig->getConsumentenprijs());
+    }
+
+    public function testConsumentenprijsCannotBeNegative()
+    {
+        $this->motorrijtuig->setConsumentenprijs(-10);
+        $this->assertNotEquals(-10, $this->motorrijtuig->getConsumentenprijs());
+    }
+
+    // TODO test definitie van consumentenprijs (volgens Belastingdienst)
+
+    // Netto catalogusprijs
+    public function testNettoCatalogusPrijsIntegerShouldStayInteger()
+    {
+        $this->motorrijtuig->setNettoCatalogusprijs(10000);
+        $this->assertEquals(10000, $this->motorrijtuig->getNettoCatalogusprijs());
+    }
+
+    public function testNettoCatalogusprijsCannotBeNegative()
+    {
+        $this->motorrijtuig->setNettoCatalogusprijs(-100);
+        $this->assertEquals(0, $this->motorrijtuig->getNettoCatalogusprijs());
+    }
+
+    public function testNettoCatalogusprijsShouldBeInteger()
+    {
+        $this->motorrijtuig->setNettoCatalogusprijs(10000.10);
+        $this->assertEquals(10000, $this->motorrijtuig->getNettoCatalogusprijs());
+    }
+
+    // Datum eerste ingebruikname
+    public function testDatumEersteIngebruiknameShouldBeValidDate()
+    {
+        $this->motorrijtuig->setDatumIngebruikname(new DateTime("30-30-2030"));
+        $this->assertNotEquals("30-30-2030", $this->motorrijtuig->getDatumEersteIngebruikname()->format("d-m-Y"));
+    }
+
+    public function testDatumEersteIngebruiknameShouldBeInThePast()
+    {
+        $datetime_tomorrow = new DateTime(strtotime("+1 day", time()));
+        $this->motorrijtuig->setDatumIngebruikname($datetime_tomorrow);
+        $this->assertNotEquals(date("d-m-Y", strtotime("+1 day", time())), $this->motorrijtuig->getDatumEersteIngebruikname()->format("d-m-Y"));
+    }
+
+    public function testDatumEersteIngebruiknameShouldBeAfterJanuary1900()
+    {
+        $this->assertEquals(false, $this->motorrijtuig->setDatumIngebruikname( new DateTime("31-12-1899") ));
+    }
+
+    // FIXME: TODO wat is het verschil tussen datum eerste ingebruikname en datum eerste toelating?
+    // als dat het zelfde is dan moet 1 van de 2 komen te vervallen in de Motorrijtuig klasse
+    // anders moet er een Unit test komen voor datum eerste toelating
 }

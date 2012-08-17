@@ -364,8 +364,7 @@ class BPMBerekening
             $bpmberekening['historisch_bruto_bpm_bedrag'] = $this->berekenBpmVolgensHistorischBrutoBpmBedrag();
         }
 
-        // Taxatierapport
-        // TODO
+        // TODO BPM Berekening op basis van Taxatierapport
 //        $bpmberekening['taxatierapport'] = array(
 //            'afschrijvingspercentage' => $afschrijvingspercentage,
 //            'bpm_over_c02_uitstoot' => $bpm_over_c02,

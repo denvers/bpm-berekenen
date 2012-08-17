@@ -10,7 +10,6 @@ use DateTime;
  */
 abstract class Motorrijtuig
 {
-
     /**
      * @var int
      */
@@ -89,6 +88,9 @@ abstract class Motorrijtuig
      */
     public function setCo2Uitstoot($co2_uitstoot)
     {
+        if ( $co2_uitstoot < 0 ) $co2_uitstoot = 0;
+        $co2_uitstoot = round($co2_uitstoot);
+
         $this->co2_uitstoot = $co2_uitstoot;
     }
 
@@ -105,6 +107,8 @@ abstract class Motorrijtuig
      */
     public function setConsumentenprijs($consumentenprijs)
     {
+        $consumentenprijs = round($consumentenprijs);
+        if ( $consumentenprijs < 0 ) $consumentenprijs = 0;
         $this->consumentenprijs = $consumentenprijs;
     }
 
@@ -121,6 +125,8 @@ abstract class Motorrijtuig
      */
     public function setNettoCatalogusprijs($netto_catalogusprijs)
     {
+        $netto_catalogusprijs = round($netto_catalogusprijs);
+        if ( $netto_catalogusprijs < 0 ) $netto_catalogusprijs = 0;
         $this->netto_catalogusprijs = $netto_catalogusprijs;
     }
 
@@ -153,6 +159,9 @@ abstract class Motorrijtuig
      */
     public function setInkoopwaarde($inkoopwaarde)
     {
+        $inkoopwaarde = round($inkoopwaarde);
+        if ( $inkoopwaarde < 0 ) $inkoopwaarde = 0;
+
         $this->inkoopwaarde = $inkoopwaarde;
     }
 
