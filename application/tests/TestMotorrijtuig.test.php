@@ -104,20 +104,28 @@ class TestMotorrijtuig extends PHPUnit_Framework_TestCase
     // Datum eerste ingebruikname
     public function testDatumEersteIngebruiknameShouldBeValidDate()
     {
-        $this->motorrijtuig->setDatumIngebruikname(new DateTime("30-30-2030"));
-        $this->assertNotEquals("30-30-2030", $this->motorrijtuig->getDatumEersteIngebruikname()->format("d-m-Y"));
+        try {
+            $this->motorrijtuig->setDatumIngebruikname(new DateTime("30-30-2030"));
+            $this->assertEquals(true, false);
+        } catch (Exception $ex) {
+            $this->assertEquals(true, true);
+        }
     }
 
     public function testDatumEersteIngebruiknameShouldBeInThePast()
     {
-        $datetime_tomorrow = new DateTime(strtotime("+1 day", time()));
-        $this->motorrijtuig->setDatumIngebruikname($datetime_tomorrow);
-        $this->assertNotEquals(date("d-m-Y", strtotime("+1 day", time())), $this->motorrijtuig->getDatumEersteIngebruikname()->format("d-m-Y"));
+        $datetime_tomorrow = new DateTime(date("d-m-Y", strtotime("+1 day", time())));
+        try {
+            $this->motorrijtuig->setDatumIngebruikname($datetime_tomorrow);
+            $this->assertEquals(true, false);
+        } catch (Exception $ex) {
+            $this->assertEquals(true, true);
+        }
     }
 
     public function testDatumEersteIngebruiknameShouldBeAfterJanuary1900()
     {
-        $this->assertEquals(false, $this->motorrijtuig->setDatumIngebruikname( new DateTime("31-12-1899") ));
+        $this->assertEquals(false, $this->motorrijtuig->setDatumIngebruikname(new DateTime("31-12-1899")));
     }
 
     // FIXME: TODO wat is het verschil tussen datum eerste ingebruikname en datum eerste toelating?

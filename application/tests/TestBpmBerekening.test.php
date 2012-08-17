@@ -1,54 +1,119 @@
 <?php
 use BPMBerekening\BPMBerekening;
+use BPMBerekening\Motorrijtuig\PersonenautoDiesel;
 
 class TestBpmBerekening extends PHPUnit_Framework_TestCase
 {
-    // TODO setSoortAuto
-    public function testSoortAutoPersonenauto()
+    // setSoortAuto
+    public function testSoortAutoPersonenautoDieselShouldReturnPersonenautoDiesel()
     {
-        $this->assertTrue(false);
+        $bpmberekening = new BPMBerekening();
+        $bpmberekening->setBrandstof("diesel");
+        $bpmberekening->setSoortAuto("personenauto");
+
+        $this->assertEquals(true, $bpmberekening->getMotorrijtuig() instanceof \BPMBerekening\Motorrijtuig\PersonenautoDiesel);
     }
 
-    // TODO
-    public function testSoortAutoKampeerauto()
+    public function testSoortAutoPersonenautoBenzineShouldReturnPersonenautoGeenDiesel()
     {
-        $this->assertTrue(false);
+        $bpmberekening = new BPMBerekening();
+        $bpmberekening->setBrandstof("benzine");
+        $bpmberekening->setSoortAuto("personenauto");
+
+        $this->assertEquals(true, $bpmberekening->getMotorrijtuig() instanceof \BPMBerekening\Motorrijtuig\PersonenautoGeenDiesel);
     }
 
-    // TODO
-    public function testSoortAutoBestelauto()
+    public function testSoortAutoPersonenautoLpgShouldReturnPersonenautoGeenDiesel()
     {
-        $this->assertTrue(false);
+        $bpmberekening = new BPMBerekening();
+        $bpmberekening->setBrandstof("lpg");
+        $bpmberekening->setSoortAuto("personenauto");
+
+        $this->assertEquals(true, $bpmberekening->getMotorrijtuig() instanceof \BPMBerekening\Motorrijtuig\PersonenautoGeenDiesel);
     }
 
-    // TODO
-    public function testSoortAutoMotorfiets()
+    // Kampeerauto
+    public function testSoortAutoKampeerautoDieselShouldReturnKampeerautoDiesel()
     {
-        $this->assertTrue(false);
+        $bpmberekening = new BPMBerekening();
+        $bpmberekening->setBrandstof("diesel");
+        $bpmberekening->setSoortAuto("kampeerauto");
+
+        $this->assertEquals(true, $bpmberekening->getMotorrijtuig() instanceof \BPMBerekening\Motorrijtuig\KampeerautoDiesel);
     }
 
-    // getMotorrijtuig
-    public function testGetMotorrijtuigShouldReturnPersonenauto()
+    public function testSoortAutoKampeerautoBenzineShouldReturnKampeerautoBenzine()
     {
-        $this->assertTrue(false);
+        $bpmberekening = new BPMBerekening();
+        $bpmberekening->setBrandstof("benzine");
+        $bpmberekening->setSoortAuto("kampeerauto");
+
+        $this->assertEquals(true, $bpmberekening->getMotorrijtuig() instanceof \BPMBerekening\Motorrijtuig\KampeerautoGeenDiesel);
     }
 
-    // TODO
-    public function testGetMotorrijtuigShouldReturnKampeerauto()
+    public function testSoortAutoKampeerautoLpgShouldReturnKampeerautoGeenDiesel()
     {
-        $this->assertTrue(false);
+        $bpmberekening = new BPMBerekening();
+        $bpmberekening->setBrandstof("lpg");
+        $bpmberekening->setSoortAuto("kampeerauto");
+
+        $this->assertEquals(true, $bpmberekening->getMotorrijtuig() instanceof \BPMBerekening\Motorrijtuig\KampeerautoGeenDiesel);
     }
 
-    // TODO
-    public function testGetMotorrijtuigShouldReturnBestelauto()
+    // Bestelauto
+    public function testSoortAutoBestelautoDieselShouldReturnBestelautoDiesel()
     {
-        $this->assertTrue(false);
+        $bpmberekening = new BPMBerekening();
+        $bpmberekening->setBrandstof("diesel");
+        $bpmberekening->setSoortAuto("bestelauto");
+
+        $this->assertEquals(true, $bpmberekening->getMotorrijtuig() instanceof \BPMBerekening\Motorrijtuig\BestelautoDiesel);
     }
 
-    // TODO
-    public function testGetMotorrijtuigShouldReturnMotorfiets()
+    public function testSoortBestelautoBenzineShouldReturnBestelautoGeenDiesel()
     {
-        $this->assertTrue(false);
+        $bpmberekening = new BPMBerekening();
+        $bpmberekening->setBrandstof("benzine");
+        $bpmberekening->setSoortAuto("bestelauto");
+
+        $this->assertEquals(true, $bpmberekening->getMotorrijtuig() instanceof \BPMBerekening\Motorrijtuig\BestelautoGeenDiesel);
+    }
+
+    public function testSoortBestelautoLpgShouldReturnBestelautoGeenDiesel()
+    {
+        $bpmberekening = new BPMBerekening();
+        $bpmberekening->setBrandstof("lpg");
+        $bpmberekening->setSoortAuto("bestelauto");
+
+        $this->assertEquals(true, $bpmberekening->getMotorrijtuig() instanceof \BPMBerekening\Motorrijtuig\BestelautoGeenDiesel);
+    }
+
+    // Motorfiets
+    public function testSoortAutoMotorfietsBenzineShouldReturnMotorfiets()
+    {
+        $bpmberekening = new BPMBerekening();
+        $bpmberekening->setBrandstof("benzine");
+        $bpmberekening->setSoortAuto("motorfiets");
+
+        $this->assertEquals(true, $bpmberekening->getMotorrijtuig() instanceof \BPMBerekening\Motorrijtuig\Motorfiets);
+    }
+
+    public function testSoortAutoMotorfietsDieselShouldReturnMotorfiets()
+    {
+        $bpmberekening = new BPMBerekening();
+        $bpmberekening->setBrandstof("diesel");
+        $bpmberekening->setSoortAuto("motorfiets");
+
+        $this->assertEquals(true, $bpmberekening->getMotorrijtuig() instanceof \BPMBerekening\Motorrijtuig\Motorfiets);
+    }
+
+    public function testSoortAutoMotorfietsLpgShouldReturnMotorfiets()
+    {
+        $bpmberekening = new BPMBerekening();
+        $bpmberekening->setBrandstof("lpg");
+        $bpmberekening->setSoortAuto("motorfiets");
+
+        $this->assertEquals(true, $bpmberekening->getMotorrijtuig() instanceof \BPMBerekening\Motorrijtuig\Motorfiets);
     }
 
     /**
@@ -56,12 +121,10 @@ class TestBpmBerekening extends PHPUnit_Framework_TestCase
      */
     public function testBpmBerekeningZonderWaardes()
     {
-        // Verwacht een exception bij het berekenen van de BPM zonder
-        // voldoende input.
+        // Verwacht een exception bij het berekenen van de BPM zonder voldoende input.
         try {
             $BpmBerekening = new BPMBerekening();
             $BpmBerekening->berekenBPM();
-
             $this->assertTrue(false);
         } catch (Exception $ex) {
             $this->assertTrue(true);
