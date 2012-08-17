@@ -128,7 +128,7 @@ class TestMotorrijtuig extends PHPUnit_Framework_TestCase
         $this->assertEquals(false, $this->motorrijtuig->setDatumIngebruikname(new DateTime("31-12-1899")));
     }
 
-    // FIXME: TODO wat is het verschil tussen datum eerste ingebruikname en datum eerste toelating?
+    // TODO wat is het verschil tussen datum eerste ingebruikname en datum eerste toelating?
     // als dat het zelfde is dan moet 1 van de 2 komen te vervallen in de Motorrijtuig klasse
     // anders moet er een Unit test komen voor datum eerste toelating
 }

@@ -368,7 +368,7 @@ class TestBpmBerekening extends PHPUnit_Framework_TestCase
         $this->assertEquals($bpm, 6004);
     }
 
-//    FIXME
+//    TODO
 //    Voldoet uw dieselpersonenauto of dieselkampeerauto aan de Euro 6-norm?
 //    En is uw dieselpersonenauto of dieselkampeerauto op naam gesteld na 31 december 2011?
 //    Dan krijgt u een korting op de bpm van € 1.000.
