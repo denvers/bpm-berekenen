@@ -1,5 +1,4 @@
-<?php
-namespace BPMBerekening;
+<?php namespace BPMBerekening;
 
 /**
  * User: dsessink

@@ -8,5 +8,4 @@ namespace BPMBerekening\Brandstofsoort;
  */
 class Diesel extends Brandstofsoort
 {
-
 }

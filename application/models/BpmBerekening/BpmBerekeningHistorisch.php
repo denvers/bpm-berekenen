@@ -1,5 +1,4 @@
-<?php
-namespace BPMBerekening;
+<?php namespace BPMBerekening;
 
 use Laravel\Log;
 

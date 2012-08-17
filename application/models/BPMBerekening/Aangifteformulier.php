@@ -1,5 +1,4 @@
-<?php
-namespace BPMBerekening;
+<?php namespace BPMBerekening;
 
 /**
  * User: dsessink
@@ -13,6 +12,9 @@ class Aangifteformulier
      */
     private $aangifteformulier_origineel;
 
+    /**
+     * Constructor
+     */
     public function __construct()
     {
         $this->aangifteformulier_origineel = dirname(__FILE__) . "/../../pdf/originals/berekening_bpm_bij_aangifte_melding_bpm0141b22fol.pdf";
@@ -22,7 +24,7 @@ class Aangifteformulier
     }
 
     /**
-     * TODO
+     * TODO PDF genereren en invullen op basis van FDF file
      */
     public function get()
     {
@@ -149,8 +151,10 @@ class Aangifteformulier
     }
 
     /**
-     * @param $strings
-     * @param $keys
+     * Generates FDF file based upon $strings and $keys
+     *
+     * @param array $strings
+     * @param array $keys
      * @return string
      */
     private function create_fdf($strings, $keys)

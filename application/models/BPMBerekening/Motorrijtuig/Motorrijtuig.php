@@ -8,7 +8,8 @@ use DateTime;
  * Date: 24-07-12
  * Time: 14:04
  */
-abstract class Motorrijtuig {
+abstract class Motorrijtuig
+{
 
     /**
      * @var int

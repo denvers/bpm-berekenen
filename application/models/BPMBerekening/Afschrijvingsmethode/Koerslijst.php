@@ -23,9 +23,8 @@ class Koerslijst implements IAfschrijvingsmethode
      */
     public function setMotorrijtuig($motorrijtuig)
     {
-        if ( !class_basename($motorrijtuig) == "Motorrijtuig" )
-        {
-            throw new Exception("Invalid Motorrijtuig given: ".class_basename($motorrijtuig));
+        if (!class_basename($motorrijtuig) == "Motorrijtuig") {
+            throw new Exception("Invalid Motorrijtuig given: " . class_basename($motorrijtuig));
         }
 
         $this->motorrijtuig = $motorrijtuig;
@@ -38,11 +37,10 @@ class Koerslijst implements IAfschrijvingsmethode
      */
     public function berekenAfschrijvingspercentage($datum_aangifte = null)
     {
-        // FIXME waarde volgens de koerslijst ophalen
+        // TODO waarde volgens de koerslijst ophalen
         // en niet de door de gebruiker ingevoerde inkoopwaarde ;)
         // die inkoopwaarde kan wel weg
-        if ( !isset($this->motorrijtuig) )
-        {
+        if (!isset($this->motorrijtuig)) {
             $ex = new Exception("Geen Motorrijtuig object gevonden voor het berekenen van het afschrijvingspercentage.");
             Log::exception($ex);
             throw $ex;
@@ -61,15 +59,15 @@ class Koerslijst implements IAfschrijvingsmethode
     }
 
     /**
-     * @param $consumentenprijs
-     * @param $inkoopwaarde
+     * @param int $consumentenprijs
+     * @param int $inkoopwaarde
      * @return int
      */
     public function berekenAfschrijving($consumentenprijs, $inkoopwaarde)
     {
         $afschrijving = $consumentenprijs - $inkoopwaarde;
 
-        if ( $afschrijving <= 0 )
+        if ($afschrijving <= 0)
             $afschrijving = 0;
 
         Log::info("Afschrijving: EUR " . $consumentenprijs . " - EUR " . $inkoopwaarde . " = EUR " . $afschrijving . "<br>");

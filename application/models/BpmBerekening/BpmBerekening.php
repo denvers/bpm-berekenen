@@ -1,5 +1,4 @@
-<?php
-namespace BPMBerekening;
+<?php namespace BPMBerekening;
 
 use DateTime;
 use BPMBerekening\BpmBerekeningHistorisch;
@@ -319,6 +318,9 @@ class BPMBerekening
         $motorrijtuig = $this->getMotorrijtuig();
 
         $bpmberekening = array();
+        $bpmberekening['koerslijst'] = array();
+        $bpmberekening['forfaitaire_tabel'] = array();
+        $bpmberekening['historisch_bruto_bpm_bedrag'] = array();
 
         if (true === $this->geenBpmVoorMotorrijtuigOpBasisVanCO2Uitstoot($motorrijtuig)) {
             $bpmberekening['koerslijst'] = array(
@@ -357,9 +359,10 @@ class BPMBerekening
         // Forfaitaire_tabel
         $bpmberekening['forfaitaire_tabel'] = $this->berekenBpmVolgensForfaitaireTabel();
 
-        // Op basis van historisch bruto bpm bedrag
-        // TODO alleen voor auto's > 1 jan 1993
-        $bpmberekening['historisch_bruto_bpm_bedrag'] = $this->berekenBpmVolgensHistorischBrutoBpmBedrag();
+        // Op basis van historisch bruto bpm bedrag alleen voor auto's > 1 jan 1993
+        if( $motorrijtuig->getDatumEersteIngebruikname()->format("Ymd") >= 19930101 ) {
+            $bpmberekening['historisch_bruto_bpm_bedrag'] = $this->berekenBpmVolgensHistorischBrutoBpmBedrag();
+        }
 
         // Taxatierapport
         // TODO
@@ -447,8 +450,16 @@ class BPMBerekening
 
         $bpm_over_c02 = $this->berekenBpmOverCO2Uitstoot($this->brandstof, $this->co2_uitstoot);
 
-        $BpmBerekeningHistorisch = new BpmBerekeningHistorisch();
-        $bpm_over_catalogusprijs = $BpmBerekeningHistorisch->berekenBpmOverCatalogusprijs($motorrijtuig);
+        // BPM Berekening uitvoeren op basis van hystorische waarde
+        // als dat niet lukt, wordt er een exception gegooid
+        // en returnen we false als resultaat.
+        try {
+            $BpmBerekeningHistorisch = new BpmBerekeningHistorisch();
+            $bpm_over_catalogusprijs = $BpmBerekeningHistorisch->berekenBpmOverCatalogusprijs($motorrijtuig);
+        } catch (Exception $ex) {
+            Log::info($ex->getMessage());
+            return false;
+        }
 
         $bruto_bpm = $this->berekenBrutoBpm($bpm_over_c02, $bpm_over_catalogusprijs);
 

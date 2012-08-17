@@ -8,5 +8,4 @@ namespace BPMBerekening\Brandstofsoort;
  */
 class Benzine extends Brandstofsoort
 {
-
 }
