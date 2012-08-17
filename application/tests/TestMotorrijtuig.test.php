@@ -1,7 +1,8 @@
 <?php
 use BPMBerekening\Motorrijtuig\Motorfiets;
 
-class TestMotorrijtuig extends PHPUnit_Framework_TestCase {
+class TestMotorrijtuig extends PHPUnit_Framework_TestCase
+{
 
     var $motorrijtuig;
 
@@ -22,9 +23,7 @@ class TestMotorrijtuig extends PHPUnit_Framework_TestCase {
         try {
             $this->motorrijtuig->setInkoopwaarde(-100);
             $this->assertTrue(false);
-        }
-        catch( Exception $ex )
-        {
+        } catch (Exception $ex) {
             $this->assertTrue(true);
         }
     }

@@ -11,24 +11,18 @@ class PersonenautoGeenDiesel extends Motorrijtuig
     /**
      * @param mixed $co2_uitstoot
      */
-    public function setCo2Uitstoot( $co2_uitstoot )
+    public function setCo2Uitstoot($co2_uitstoot)
     {
         // Requirement 11:
         // Geen co2_uitstoot vastgesteld; Dan wordt de CO2-uitstoot vastgesteld op 350 gr/km voor een benzineauto
-        if ( is_null($co2_uitstoot) )
-        {
+        if (is_null($co2_uitstoot)) {
             $this->co2_uitstoot = 350;
-        }
-        else
-        {
+        } else {
             $co2_uitstoot = intval($co2_uitstoot);
 
-            if ( $co2_uitstoot >= 0 )
-            {
+            if ($co2_uitstoot >= 0) {
                 $this->co2_uitstoot = $co2_uitstoot;
-            }
-            else
-            {
+            } else {
                 $this->co2_uitstoot = 0;
             }
         }

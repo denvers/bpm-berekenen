@@ -6,6 +6,6 @@ namespace BPMBerekening\Motorrijtuig;
  * Date: 24-07-12
  * Time: 14:13
  */
-class BestelautoGeenDiesel extends Motorrijtuig {
-
+class BestelautoGeenDiesel extends Motorrijtuig
+{
 }

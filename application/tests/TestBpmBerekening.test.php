@@ -4,42 +4,50 @@ use BPMBerekening\BPMBerekening;
 class TestBpmBerekening extends PHPUnit_Framework_TestCase
 {
     // TODO setSoortAuto
-    public function testSoortAutoPersonenauto() {
+    public function testSoortAutoPersonenauto()
+    {
         $this->assertTrue(false);
     }
 
     // TODO
-    public function testSoortAutoKampeerauto() {
+    public function testSoortAutoKampeerauto()
+    {
         $this->assertTrue(false);
     }
 
     // TODO
-    public function testSoortAutoBestelauto() {
+    public function testSoortAutoBestelauto()
+    {
         $this->assertTrue(false);
     }
 
     // TODO
-    public function testSoortAutoMotorfiets() {
+    public function testSoortAutoMotorfiets()
+    {
         $this->assertTrue(false);
     }
 
     // getMotorrijtuig
-    public function testGetMotorrijtuigShouldReturnPersonenauto() {
+    public function testGetMotorrijtuigShouldReturnPersonenauto()
+    {
         $this->assertTrue(false);
     }
 
     // TODO
-    public function testGetMotorrijtuigShouldReturnKampeerauto() {
+    public function testGetMotorrijtuigShouldReturnKampeerauto()
+    {
         $this->assertTrue(false);
     }
 
     // TODO
-    public function testGetMotorrijtuigShouldReturnBestelauto() {
+    public function testGetMotorrijtuigShouldReturnBestelauto()
+    {
         $this->assertTrue(false);
     }
 
     // TODO
-    public function testGetMotorrijtuigShouldReturnMotorfiets() {
+    public function testGetMotorrijtuigShouldReturnMotorfiets()
+    {
         $this->assertTrue(false);
     }
 

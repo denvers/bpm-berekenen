@@ -8,5 +8,4 @@ namespace BPMBerekening\Brandstofsoort;
  */
 class LpgAfFabriek extends Brandstofsoort
 {
-
 }

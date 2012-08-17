@@ -20,6 +20,9 @@ use BPMBerekening\Motorrijtuig\Motorfiets;
  */
 class BPMBerekening
 {
+    /**
+     * @var bool
+     */
     private $debug = false;
 
     /**
@@ -240,6 +243,7 @@ class BPMBerekening
 
     /**
      * Dekt requirement 1-6
+     *
      * @param \BPMBerekening\Motorrijtuig\Motorrijtuig $motorrijtuig
      * @return bool
      */
@@ -434,6 +438,7 @@ class BPMBerekening
 
     /**
      * Volledige BPM berekening volgens historisch bruto bpm bedrag
+     *
      * @return array
      */
     public function berekenBpmVolgensHistorischBrutoBpmBedrag()
@@ -464,8 +469,8 @@ class BPMBerekening
     }
 
     /**
-     * @param $bpm_co2_uitstoot
-     * @param $bpm_catalogusprijs
+     * @param int $bpm_co2_uitstoot
+     * @param int $bpm_catalogusprijs
      * @return mixed
      * @test done
      */
@@ -475,8 +480,8 @@ class BPMBerekening
     }
 
     /**
-     * @param $brandstof
-     * @param $co2_uitstoot
+     * @param string $brandstof
+     * @param int $co2_uitstoot
      * @return mixed
      * @throws \Exception
      * @requirement 7
@@ -493,8 +498,7 @@ class BPMBerekening
             return $this->berekenBpmOverCO2UitstootBenzine($co2_uitstoot);
         } elseif (strtolower($brandstof) == "lpg") {
             return $this->berekenBpmOverCO2UitstootBenzine($co2_uitstoot);
-        }
-        else {
+        } else {
             $ex = new \Exception("#1: Brandstof: " . $brandstof . " is onbekend.");
             \Laravel\Log::exception($ex);
             throw $ex;
@@ -502,7 +506,7 @@ class BPMBerekening
     }
 
     /**
-     * @param $co2_uitstoot
+     * @param int $co2_uitstoot
      * @return mixed
      * @requirement 23: CO2-uitstoot van 0 tot en met 91 gram/km: trek van de CO2-uitstoot van de auto de waarde 0 af vermenigvuldig de uitkomst met het bedrag 0 tel hier het bedrag 0 bij op
      * @requirement 24: CO2-uitstoot van 91 tot en met 143 gram/km: trek van de CO2-uitstoot van de auto de waarde 91 af vermenigvuldig de uitkomst met het bedrag 101 tel hier het bedrag 0 bij op
@@ -545,7 +549,7 @@ class BPMBerekening
     }
 
     /**
-     * @param $co2_uitstoot
+     * @param int $co2_uitstoot
      * @return mixed
      * @requirement 18: CO2 uitstoot van 0 tot en met 102 gram/km: trek van de CO2-uitstoot van de auto de waarde 0 af vermenigvuldig de uitkomst met het bedrag 0 tel hier het bedrag 0 bij op
      * @requirement 19: CO2 uitstoot van 102 tot en met 159 gram/km: trek van de CO2-uitstoot van de auto de waarde 102 af vermenigvuldig de uitkomst met het bedrag 101 tel hier het bedrag 0 bij op
@@ -587,9 +591,9 @@ class BPMBerekening
     }
 
     /**
-     * @param $brandstof
-     * @param $netto_catalogusprijs
-     * @param $co2_uitstoot
+     * @param string $brandstof
+     * @param int $netto_catalogusprijs
+     * @param int $co2_uitstoot
      * @return float
      * @requirement 8: 2/2 van de hoogte van het te betalen bpm-bedrag voor personenauto's wordt bepaald door de catalogusprijs van de personenauto (BPM)
      */
@@ -611,8 +615,8 @@ class BPMBerekening
     }
 
     /**
-     * @param $netto_catalogusprijs
-     * @param $co2_uitstoot
+     * @param int $netto_catalogusprijs
+     * @param int $co2_uitstoot
      * @return float
      * @test done
      */
@@ -642,7 +646,7 @@ class BPMBerekening
     }
 
     /**
-     * @param $netto_catalogusprijs
+     * @param int $netto_catalogusprijs
      * @return float
      * @test done
      */
@@ -666,8 +670,8 @@ class BPMBerekening
 
     /**
      * @requirement 51: Netto bpm-bedrag is het bruto bpm-bedrag min de korting op basis van de afschrijving van het Motorrijtuig
-     * @param $afschrijvingspercentage
-     * @param $bruto_bpm
+     * @param int $afschrijvingspercentage
+     * @param int $bruto_bpm
      * @return float|int
      */
     private function berekenNettoBpmBedrag($afschrijvingspercentage, $bruto_bpm)
@@ -687,6 +691,9 @@ class BPMBerekening
         return $bpm;
     }
 
+    /**
+     * @param string $msg
+     */
     private function output($msg)
     {
         \Laravel\Log::info($msg);

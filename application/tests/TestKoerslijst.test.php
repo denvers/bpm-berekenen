@@ -40,8 +40,7 @@ class TestKoerslijst extends PHPUnit_Framework_TestCase
         try {
             $Koerslijst->berekenAfschrijvingsPercentage(21700, 35000);
             $this->assertTrue(false);
-        } catch( Exception $ex )
-        {
+        } catch (Exception $ex) {
             $this->assertTrue(true);
         }
     }

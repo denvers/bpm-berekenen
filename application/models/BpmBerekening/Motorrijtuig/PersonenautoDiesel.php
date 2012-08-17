@@ -11,22 +11,16 @@ class PersonenautoDiesel extends Motorrijtuig
     /**
      * @param int $co2_uitstoot (set to null als er geen co2 is vastgesteld)
      */
-    public function setCo2Uitstoot( $co2_uitstoot )
+    public function setCo2Uitstoot($co2_uitstoot)
     {
         // Requirement 12:
         // Geen co2_uitstoot vastgesteld; Dan wordt de CO2-uitstoot vastgesteld op 302 gr/km voor een dieselauto
-        if ( is_null($co2_uitstoot) )
-        {
+        if (is_null($co2_uitstoot)) {
             $this->co2_uitstoot = 302;
-        }
-        else
-        {
-            if ( $co2_uitstoot >= 0 )
-            {
+        } else {
+            if ($co2_uitstoot >= 0) {
                 $this->co2_uitstoot = $co2_uitstoot;
-            }
-            else
-            {
+            } else {
                 $this->co2_uitstoot = 0;
             }
         }
@@ -37,8 +31,7 @@ class PersonenautoDiesel extends Motorrijtuig
      */
     public function setEuro6Norm($voldoet)
     {
-        if ( $voldoet === true )
-        {
+        if ($voldoet === true) {
             $this->euro_6norm = true;
         }
     }

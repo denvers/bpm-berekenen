@@ -8,5 +8,4 @@ namespace BPMBerekening\Motorrijtuig;
  */
 class Motorfiets extends Motorrijtuig
 {
-
 }
