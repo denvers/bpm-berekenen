@@ -86,7 +86,7 @@
 
                 <h2>Uw BPM berekening</h2>
 
-                    <div style="display:inline-block; width:30%; padding: 0 15px 0 0;">
+                    <div style="display:inline-block; width:30%; padding: 0 15px 0 0; vertical-align: top;">
                         <h3>Forfaitaire tabel</h3>
                         <ul>
                             <li>Afschrijvingspercentage: <?= $berekening['forfaitaire_tabel']['afschrijvingspercentage']; ?>%</li>
@@ -97,7 +97,7 @@
                         </ul>
                     </div>
 
-                    <div style="display:inline-block; width:30%; padding: 0 15px 0 0;">
+                    <div style="display:inline-block; width:30%; padding: 0 15px 0 0; vertical-align: top;">
                         <h3>Koerslijst tabel</h3>
                         <ul>
                             <li>Afschrijvingspercentage: <?= $berekening['koerslijst']['afschrijvingspercentage']; ?>%</li>
@@ -109,8 +109,9 @@
                         </ul>
                     </div>
 
-                    <div style="display:inline-block; width:30%; padding: 0 15px 0 0;">
+                    <div style="display:inline-block; width:30%; padding: 0 15px 0 0; vertical-align: top;">
                         <h3>Historisch bruto bpm bedrag</h3>
+                        <?php if ( count($berekening['historisch_bruto_bpm_bedrag']) ): ?>
                         <ul>
                             <li>Afschrijvingspercentage: <?= $berekening['historisch_bruto_bpm_bedrag']['afschrijvingspercentage']; ?>%</li>
                             <li>BPM over CO<sub>2</sub>-uitstoot: &euro; <?= number_format($berekening['historisch_bruto_bpm_bedrag']['bpm_over_c02_uitstoot'], 0, ",", "."); ?>,-</li>
@@ -119,6 +120,9 @@
                             <li>EURO6-norm korting: &euro; <?= number_format($berekening['historisch_bruto_bpm_bedrag']['euro6_norm_korting'], 0, ",", "."); ?>,-</li>
                             <li><b>Te betalen bpm (netto bpm): &euro; <?= number_format($berekening['historisch_bruto_bpm_bedrag']['netto_bpm'], 0, ",", "."); ?>,-</b></li>
                         </ul>
+                        <?php else: ?>
+                        <p>Bpm berekening op basis van historisch bruto bpm bedrag niet avn toepassing.</p>
+                        <?php endif; ?>
                     </div>
 
                 <?php endif; ?>
