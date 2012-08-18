@@ -25,6 +25,7 @@ $environments = array(
 
 	'local' => array('http://localhost*', '*.dev'),
     'staging' => array('http://301.nl/bpm-berekenen*', 'http://www.301.nl/bpm-berekenen*'),
+    'production' => array('http://www.snelbpmberekenen.nl', 'http://www.snelbpmberekenen.nl'),
 
 );
 
@@ -36,7 +37,7 @@ $paths['app'] = 'application';
 // --------------------------------------------------------------
 // The path to the Laravel directory.
 // --------------------------------------------------------------
-$paths['sys'] = 'laravel';
+$paths['sys'] = '../laravel';
 
 // --------------------------------------------------------------
 // The path to the bundles directory.
@@ -51,7 +52,7 @@ $paths['storage'] = 'storage';
 // --------------------------------------------------------------
 // The path to the public directory.
 // --------------------------------------------------------------
-$paths['public'] = 'public';
+$paths['public'] = 'web';
 
 // *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
 // END OF USER CONFIGURATION. HERE BE DRAGONS!
