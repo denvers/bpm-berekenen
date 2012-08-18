@@ -32,11 +32,6 @@
 |
 */
 
-//Route::any('/', function()
-//{
-//	return View::make('home.index');
-//});
-
 Route::controller('home');
 
 /*
