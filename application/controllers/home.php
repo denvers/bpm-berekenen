@@ -35,13 +35,35 @@ class Home_Controller extends Base_Controller
     {
         $viewdata = array();
 
-        if (Input::has('soort')) {
+
+        if( Input::get('soort') )
+        {
+            $input = Input::all();
+
+            $rules = array(
+                'soort' => 'required',
+                'brandstof' => 'required',
+                'datum_aangifte' => 'required|after:'.date('d-m-Y', strtotime('-1 day')), // vandaag of daarna
+                'datum_eerste_ingebruikname' => 'required|before:' . date('d-m-Y'), // voor vandaag
+                'co2_uitstoot' => 'integer',
+                'netto_catalogusprijs_eerste_ingebruikname' => 'required|integer|min:1',
+                'consumentenprijs' => 'required|integer|min:1',
+                'inkoopwaarde' => 'required|integer|min:0',
+            );
+
+            $validation = Validator::make($input, $rules);
+        }
+
+        if (!Input::get('soort') || $validation->fails()) {
+            $viewdata['validation_errors'] = $validation->errors;
+        } else {
             $viewdata['berekening_uitgevoerd'] = true;
             $viewdata['berekening'] = $this->berekeningUitvoeren();
 
 //            $aangifteformulier = new Aangifteformulier();
 //            $aangifteformulier->get();
 //            die();
+
         }
 
         return View::make('home.index', $viewdata);
@@ -62,7 +84,6 @@ class Home_Controller extends Base_Controller
 //            [session_payload] => Bv6GGim6BH79ZBfFAPpgLIUPdDgaD+3FhkWEOlaFuPVU6+/MoX6l+NvpsHDshCgU4Rz0ONqMcDAc/EMGBMpKR3NHJ4932FiD93GTPQ0Bk1BdHA43jpacTG3V0dnOqBtvXFAPDWlR46EeszVhrGqTpGPgX2mFKV7+NeYmUAAzCQ7KW8E32Q7VbY+eWOzZZOjqFZoRmvVYDf76X7rb3jD3SmU9Rdmt/uvSdrJDo+ZNQ8S2VW0hcx773vgrncUKzgf8Zkjq/eJRY4KvxRWTSTzPBtfqZ2od0LaCO9gRzlqu3wZUaTtjOMdR0erRbueM3Rnd8Eb7FwSRQfQ4ETOpv9CBzA==
 //            [SQLiteManager_currentLangue] => 2
 //        )
-
 
         $BPM_Berekening = new \BPMBerekening\BPMBerekening();
         $BPM_Berekening->setBrandstof(Input::get('brandstof'));
