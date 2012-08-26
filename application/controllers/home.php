@@ -1,5 +1,5 @@
 <?php
-use \BPMBerekening\BPMBerekening;
+use BPMBerekening\BPMBerekening;
 
 class Home_Controller extends Base_Controller
 {
@@ -66,22 +66,11 @@ class Home_Controller extends Base_Controller
         return View::make('home.index', $viewdata);
     }
 
+    /**
+     * @return array
+     */
     private function berekeningUitvoeren()
     {
-//        Array
-//        (
-//            [soort] => personenauto
-//            [brandstof] => benzine
-//            [datum_eerste_ingebruikname] =>
-//            [co2_uitstoot] =>
-//            [netto_catalogusprijs_eerste_ingebruikname] =>
-//            [consumentenprijs] =>
-//            [inkoopwaarde] =>
-//            [laravel_session] => VmgaVtgy4ehR3MzPJWghG6fpUELGcbqLIXt4TsKT
-//            [session_payload] => Bv6GGim6BH79ZBfFAPpgLIUPdDgaD+3FhkWEOlaFuPVU6+/MoX6l+NvpsHDshCgU4Rz0ONqMcDAc/EMGBMpKR3NHJ4932FiD93GTPQ0Bk1BdHA43jpacTG3V0dnOqBtvXFAPDWlR46EeszVhrGqTpGPgX2mFKV7+NeYmUAAzCQ7KW8E32Q7VbY+eWOzZZOjqFZoRmvVYDf76X7rb3jD3SmU9Rdmt/uvSdrJDo+ZNQ8S2VW0hcx773vgrncUKzgf8Zkjq/eJRY4KvxRWTSTzPBtfqZ2od0LaCO9gRzlqu3wZUaTtjOMdR0erRbueM3Rnd8Eb7FwSRQfQ4ETOpv9CBzA==
-//            [SQLiteManager_currentLangue] => 2
-//        )
-
         $BPM_Berekening = new BPMBerekening();
         $BPM_Berekening->setBrandstof(Input::get('brandstof'));
         $BPM_Berekening->setCo2Uitstoot(Input::get('co2_uitstoot'));
@@ -96,6 +85,6 @@ class Home_Controller extends Base_Controller
             $BPM_Berekening->setEuro6Norm(true);
         }
 
-        return $BPM_Berekening->berekenBPM("forfaitaire_tabel");
+        return $BPM_Berekening->berekenBPM();
     }
 }
