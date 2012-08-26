@@ -1,4 +1,5 @@
 <?php
+use \BPMBerekening\BPMBerekening;
 
 class Home_Controller extends Base_Controller
 {
@@ -81,7 +82,7 @@ class Home_Controller extends Base_Controller
 //            [SQLiteManager_currentLangue] => 2
 //        )
 
-        $BPM_Berekening = new \BPMBerekening\BPMBerekening();
+        $BPM_Berekening = new BPMBerekening();
         $BPM_Berekening->setBrandstof(Input::get('brandstof'));
         $BPM_Berekening->setCo2Uitstoot(Input::get('co2_uitstoot'));
         $BPM_Berekening->setConsumentenprijs(Input::get('consumentenprijs'));
