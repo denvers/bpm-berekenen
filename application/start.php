@@ -79,7 +79,7 @@ Autoloader::directories(array(
 ));
 
 Autoloader::namespaces(array(
-    'BPMBerekening' => path('app').'models/BPMBerekening'
+    'test' => path('app').'models/test'
 ));
 
 /*

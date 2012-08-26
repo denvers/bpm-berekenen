@@ -48,8 +48,8 @@ class TestKoerslijst extends PHPUnit_Framework_TestCase
     // TODO
     public function testAfschrijvingsPercentageNormaal()
     {
-//        $Koerslijst = new BPMBerekening\Afschrijvingsmethode\Koerslijst();
-//        $Motorrijtuig = new \BPMBerekening\Motorrijtuig\Motorrijtuig();
+//        $Koerslijst = new test\Afschrijvingsmethode\Koerslijst();
+//        $Motorrijtuig = new \test\Motorrijtuig\Motorrijtuig();
 //        $Motorrijtuig->setConsumentenprijs(35000);
 //        $Motorrijtuig->getInkoopwaarde(15000);
 //
