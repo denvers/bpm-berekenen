@@ -25,7 +25,7 @@ $environments = array(
 
 	'local' => array('http://localhost*', '*.dev'),
     'staging' => array('http://301.nl/bpm-berekenen*', 'http://www.301.nl/bpm-berekenen*'),
-    'production' => array('http://www.snelbpmberekenen.nl', 'http://www.snelbpmberekenen.nl'),
+    'production' => array('http://www.snelbpmberekenen.nl*', 'http://snelbpmberekenen.nl*'),
 
 );
 
