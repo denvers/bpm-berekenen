@@ -1,6 +1,8 @@
 <?php
 namespace BPMBerekening\Motorrijtuig;
 
+use BPMBerekening\Motorrijtuig;
+
 /**
  * User: dsessink
  * Date: 24-07-12
