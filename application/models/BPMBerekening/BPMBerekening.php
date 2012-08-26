@@ -1,5 +1,9 @@
 <?php namespace BPMBerekening;
 
+require_once dirname(__FILE__) . "/Afschrijvingsmethode/Koerslijst.php";
+require_once dirname(__FILE__) . "/Afschrijvingsmethode/ForfaitaireTabel.php";
+require_once dirname(__FILE__) . "/Afschrijvingsmethode/Taxatierapport.php";
+
 use DateTime;
 use BPMBerekening\BpmBerekeningHistorisch;
 use BPMBerekening\Afschrijvingsmethode\ForfaitaireTabel;
