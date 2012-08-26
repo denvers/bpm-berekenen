@@ -1,13 +1,11 @@
 <?php namespace BPMBerekening\Motorrijtuig;
 
-use BPMBerekening\Motorrijtuig\Motorrijtuig;
-
 /**
  * User: dsessink
  * Date: 24-07-12
  * Time: 14:07
  */
-class PersonenautoGeenDiesel extends Motorrijtuig
+class PersonenautoGeenDiesel extends \BPMBerekening\Motorrijtuig
 {
     /**
      * @param mixed $co2_uitstoot

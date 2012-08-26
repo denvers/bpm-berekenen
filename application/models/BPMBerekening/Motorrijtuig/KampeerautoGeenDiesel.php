@@ -1,5 +1,4 @@
-<?php
-namespace BPMBerekening\Motorrijtuig;
+<?php namespace BPMBerekening\Motorrijtuig;
 
 /**
  * User: dsessink
