@@ -1,6 +1,4 @@
 <?php
-require dirname(__FILE__) . '/../models/BpmBerekening/BpmBerekening.php';
-
 use BPMBerekening\BPMBerekening;
 
 class Home_Controller extends Base_Controller
