@@ -35,24 +35,20 @@ class Home_Controller extends Base_Controller
     {
         $viewdata = array();
 
+        $input = Input::all();
 
-        if( Input::get('soort') )
-        {
-            $input = Input::all();
+        $rules = array(
+            'soort' => 'required',
+            'brandstof' => 'required',
+            'datum_aangifte' => 'required|after:' . date('d-m-Y', strtotime('-1 day')), // vandaag of daarna
+            'datum_eerste_ingebruikname' => 'required|before:' . date('d-m-Y'), // voor vandaag
+            'co2_uitstoot' => 'integer',
+            'netto_catalogusprijs_eerste_ingebruikname' => 'required|integer|min:1',
+            'consumentenprijs' => 'required|integer|min:1',
+            'inkoopwaarde' => 'required|integer|min:0',
+        );
 
-            $rules = array(
-                'soort' => 'required',
-                'brandstof' => 'required',
-                'datum_aangifte' => 'required|after:'.date('d-m-Y', strtotime('-1 day')), // vandaag of daarna
-                'datum_eerste_ingebruikname' => 'required|before:' . date('d-m-Y'), // voor vandaag
-                'co2_uitstoot' => 'integer',
-                'netto_catalogusprijs_eerste_ingebruikname' => 'required|integer|min:1',
-                'consumentenprijs' => 'required|integer|min:1',
-                'inkoopwaarde' => 'required|integer|min:0',
-            );
-
-            $validation = Validator::make($input, $rules);
-        }
+        $validation = Validator::make($input, $rules);
 
         if (!Input::get('soort') || $validation->fails()) {
             $viewdata['validation_errors'] = $validation->errors;
