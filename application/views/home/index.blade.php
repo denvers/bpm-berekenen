@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>BPM Berekenen</title>
+    <title>BPM Berekenen | Snel &amp; eenvoudig de goedkoopste bpm berekening!</title>
     <meta name="viewport" content="width=device-width">
     {{ HTML::style('laravel/css/style.css') }}
 
