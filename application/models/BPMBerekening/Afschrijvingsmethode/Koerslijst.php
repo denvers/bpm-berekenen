@@ -46,12 +46,12 @@ class Koerslijst implements IAfschrijvingsmethode
             throw $ex;
         }
 
-        $inkoopwaarde_volgens_koerslijst = $this->motorrijtuig->getInkoopwaarde();
+        $inkoopwaarde_volgens_koerslijst = $this->motorrijtuig->getInkoopwaarde(); // TODO hier dus de waarde van de koerslijst toepassen
         $consumentenprijs = $this->motorrijtuig->getConsumentenprijs();
 
         $afschrijving = $this->berekenAfschrijving($consumentenprijs, $inkoopwaarde_volgens_koerslijst);
 
-        $percentage = $afschrijving / ($consumentenprijs / 100);
+        $percentage = round($afschrijving / ($consumentenprijs / 100), 2);
 
         Log::info("Afschrijvingspercentage: EUR " . $afschrijving . " / ( EUR " . $consumentenprijs . " / 100 ) = " . $percentage . "%<br>");
 

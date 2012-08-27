@@ -72,14 +72,14 @@ class Home_Controller extends Base_Controller
     private function berekeningUitvoeren()
     {
         $BPM_Berekening = new BPMBerekening();
-        $BPM_Berekening->setBrandstof(Input::get('brandstof'));
-        $BPM_Berekening->setCo2Uitstoot(Input::get('co2_uitstoot'));
-        $BPM_Berekening->setConsumentenprijs(Input::get('consumentenprijs'));
-        $BPM_Berekening->setDatum(new DateTime(Input::get('datum_aangifte')));
-        $BPM_Berekening->setDatumEersteIngebruikname(Input::get('datum_eerste_ingebruikname'));
-        $BPM_Berekening->setInkoopwaarde(Input::get('inkoopwaarde'));
-        $BPM_Berekening->setNettoCatalogusprijs(Input::get('netto_catalogusprijs_eerste_ingebruikname'));
         $BPM_Berekening->setSoortAuto(Input::get('soort'));
+        $BPM_Berekening->setBrandstof(Input::get('brandstof'));
+        $BPM_Berekening->setDatumEersteIngebruikname(Input::get('datum_eerste_ingebruikname'));
+        $BPM_Berekening->setDatum(new DateTime(Input::get('datum_aangifte')));
+        $BPM_Berekening->setCo2Uitstoot(Input::get('co2_uitstoot'));
+        $BPM_Berekening->setNettoCatalogusprijs(Input::get('netto_catalogusprijs_eerste_ingebruikname'));
+        $BPM_Berekening->setConsumentenprijs(Input::get('consumentenprijs'));
+        $BPM_Berekening->setInkoopwaarde(Input::get('inkoopwaarde'));
 
         if (Input::get('euro6_norm') == "ja") {
             $BPM_Berekening->setEuro6Norm(true);

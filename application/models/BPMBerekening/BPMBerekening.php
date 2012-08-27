@@ -364,7 +364,7 @@ class BPMBerekening
         $bpmberekening['forfaitaire_tabel'] = $this->berekenBpmVolgensForfaitaireTabel();
 
         // Op basis van historisch bruto bpm bedrag alleen voor auto's > 1 jan 1993
-        if( $motorrijtuig->getDatumEersteIngebruikname()->format("Ymd") >= 19930101 ) {
+        if ($motorrijtuig->getDatumEersteIngebruikname()->format("Ymd") >= 19930101) {
             $bpmberekening['historisch_bruto_bpm_bedrag'] = $this->berekenBpmVolgensHistorischBrutoBpmBedrag();
         }
 
@@ -450,7 +450,6 @@ class BPMBerekening
     public function berekenBpmVolgensHistorischBrutoBpmBedrag()
     {
         $motorrijtuig = $this->getMotorrijtuig();
-
         $bpm_over_c02 = $this->berekenBpmOverCO2Uitstoot($this->brandstof, $this->co2_uitstoot);
 
         // BPM Berekening uitvoeren op basis van hystorische waarde

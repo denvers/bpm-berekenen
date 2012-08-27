@@ -60,7 +60,7 @@ class ForfaitaireTabel implements IAfschrijvingsmethode
      *
      * @param \DateTime $datum_eerste_tenaamstelling_nederland
      * @param \DateTime $datum_eerste_ingebruikname
-     * @return int
+     * @return float
      */
     private function tabel($datum_eerste_tenaamstelling_nederland, $datum_eerste_ingebruikname)
     {
@@ -73,7 +73,7 @@ class ForfaitaireTabel implements IAfschrijvingsmethode
         $overige_maanden = $this->berekenOverigeMaanden($interval, $forfaitwaarden);
         $afschrijvingspercentage = $forfaitwaarden[2] + ($overige_maanden * $forfaitwaarden[3]);
 
-        return $afschrijvingspercentage;
+        return round($afschrijvingspercentage,2);
     }
 
     /**
