@@ -6,7 +6,11 @@
     <title>BPM Berekenen | Snel &amp; eenvoudig de goedkoopste bpm berekening!</title>
     <meta name="viewport" content="width=device-width">
     {{ HTML::style('laravel/css/style.css') }}
+    {{ HTML::style('css/bootstrap.min.css') }}
+    {{ HTML::style('css/bootstrap-responsive.min.css') }}
     {{ HTML::style('css/style.css') }}
+
+    {{ HTML::script('js/bootstrap.min.js') }}
 
     <script type="text/javascript">
 
@@ -40,7 +44,7 @@
             <h2>Voertuiggegevens</h2>
 
             <?php if (isset($validation_errors)): ?>
-            <div class="error">
+            <div class="alert alert-error">
                 <ul>
                     <?php foreach ($validation_errors->messages as $msg): ?>
                     <li><?= $msg[0]; ?></li>
@@ -74,13 +78,13 @@
                     </tr>
                     <tr>
                         <th><?= Form::label('datum_eerste_ingebruikname', 'Datum eerste toelating'); ?></th>
-                        <td><?= Form::text('datum_eerste_ingebruikname', Input::get('datum_eerste_ingebruikname')); ?>
+                        <td><?= Form::date('datum_eerste_ingebruikname', Input::get('datum_eerste_ingebruikname')); ?>
                             <small>bijv. 01-01-1970</small>
                         </td>
                     </tr>
                     <tr>
                         <th><?= Form::label('datum_aangifte', 'Datum aangifte'); ?></th>
-                        <td><?= Form::text('datum_aangifte', date('d-m-Y') /*Input::get('datum_aangifte')*/); ?>
+                        <td><?= Form::date('datum_aangifte', date('Y-m-d') /*Input::get('datum_aangifte')*/); ?>
                             <small>bijv. 01-01-1970</small>
                         </td>
                     </tr>
