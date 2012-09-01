@@ -2,27 +2,8 @@ p.inro-text {
     margin-top: 45px;
 }
 
-label {
-    display: inline-block;
-    width: 200px;
-}
-
 .bpm-form th {
     width: 200px;
-}
-
-input[type="submit"] {
-    background: #E3591E;
-    padding: 5px 10px;
-    border: 0;
-    color: #fff;
-    font-weight: bold;
-    border-radius: 3px;
-    margin: 10px 0;
-}
-
-input[type="submit"]:hover {
-    color: #eee;
 }
 
 footer {

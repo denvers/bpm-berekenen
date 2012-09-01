@@ -1,5 +1,8 @@
-<?php
-namespace BPMBerekening\Motorrijtuig;
+<?php namespace BPMBerekening\Motorrijtuig;
+
+require_once dirname(__FILE__) . "/Motorrijtuig.php";
+
+use BPMBerekening\Motorrijtuig;
 
 /**
  * User: dsessink

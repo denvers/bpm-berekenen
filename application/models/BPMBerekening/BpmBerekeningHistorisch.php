@@ -135,6 +135,11 @@ class BpmBerekeningHistorisch
                 $brandstofkorting = 224;
             }
         }
+        else
+        {
+            // TODO deze kan waarschijnlijk weg als alle requirements er in zitten.
+            return 0;
+        }
 
         // TODO requirement 109: oude bpm tarieven elektro, waterstof, zeer zuinige personenauto, hybride => geen bpm
 

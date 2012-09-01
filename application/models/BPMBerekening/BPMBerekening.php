@@ -436,7 +436,7 @@ class BPMBerekening
             'afschrijvingspercentage' => $afschrijvingspercentage,
             'bpm_over_c02_uitstoot' => $bpm_over_c02,
             'bpm_over_catalogusprijs' => $bpm_over_catalogusprijs,
-            'euro6_norm_korting' => null,
+            'euro6_norm_korting' => 0,
             'bruto_bpm' => $bruto_bpm,
             'netto_bpm' => $netto_bpm,
         );
