@@ -25,7 +25,7 @@ class ForfaitaireTabel implements IAfschrijvingsmethode
      */
     public function setMotorrijtuig($motorrijtuig)
     {
-        if (!is_a($motorrijtuig,  "Motorrijtuig")) {
+        if (!class_basename($motorrijtuig) == "Motorrijtuig") {
             throw new Exception("Invalid Motorrijtuig given: " . class_basename($motorrijtuig));
         }
 

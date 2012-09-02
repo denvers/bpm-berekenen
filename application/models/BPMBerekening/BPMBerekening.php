@@ -463,6 +463,11 @@ class BPMBerekening
             return false;
         }
 
+        if ( is_null($bpm_over_catalogusprijs) )
+        {
+            return false; // Geen historische bpm berekening bekend/van toepassing.
+        }
+
         $bruto_bpm = $this->berekenBrutoBpm($bpm_over_c02, $bpm_over_catalogusprijs);
 
         $Koerslijst = new Koerslijst();
@@ -474,7 +479,7 @@ class BPMBerekening
         return array(
             'afschrijvingspercentage' => $afschrijvingspercentage,
             'bpm_over_c02_uitstoot' => $bpm_over_c02,
-            'bpm_over_catalogusprijs' => $bpm_over_catalogusprijs,
+            'bpm_over_catalogusprijs' => ( is_null($bpm_over_catalogusprijs) ? "n.v.t." : $bpm_over_catalogusprijs ),
             'euro6_norm_korting' => ($this->getBrandstof() == "diesel" && $this->getSoortAuto() == "personenauto" && $this->euro6_norm === true) ? 1000 : 0,
             'bruto_bpm' => $bruto_bpm,
             'netto_bpm' => $netto_bpm,

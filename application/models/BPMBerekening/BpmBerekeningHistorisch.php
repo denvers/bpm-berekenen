@@ -22,6 +22,8 @@ class BpmBerekeningHistorisch
 
         if ($datum_eerste_ingebruikname < 19930101) {
             throw new \Exception("Geen historische bpm tarieven bekend voor auto met datum eerste ingebruikname: " . $datum_eerste_ingebruikname);
+
+            return null;
         } //        --- 1a ---
 //        ingebruikname in periode van 1 januari 1993 tot en met 30 juni 1997:
         elseif ($datum_eerste_ingebruikname >= 19930101 && $datum_eerste_ingebruikname <= 19970630) {
@@ -110,17 +112,17 @@ class BpmBerekeningHistorisch
 
         // Personenauto
         if (get_class($motorrijtuig) == "test\Motorrijtuig\PersonenautoGeenDiesel") {
-            $bpm_tarief = 45.2;
-            $brandstofkorting = 1540;
+            $bpm_tarief = 45.2; // req 101
+            $brandstofkorting = 1540; // req 102
         } elseif (get_class($motorrijtuig) == "test\Motorrijtuig\PersonenautoDiesel") {
-            $bpm_tarief = 45.2;
-            $brandstofkorting = 961;
+            $bpm_tarief = 45.2; // req 101
+            $brandstofkorting = 961; // req 103
         } // Bestelauto
         elseif (get_class($motorrijtuig) == "test\Motorrijtuig\BestelautoGeenDiesel") {
-            //bestelauto met benzinemotor: geen bpm
+            // requirement 104: bestelauto met benzinemotor: geen bpm
             return 0;
         } elseif (get_class($motorrijtuig) == "test\Motorrijtuig\BestelautoDiesel") {
-            //bestelauto met dieselmotor: geen bpm
+            // requirement 105: bestelauto met dieselmotor: geen bpm
             return 0;
         } // Motorfiets
         elseif (get_class($motorrijtuig) == "test\Motorrijtuig\Motorfiets") {
