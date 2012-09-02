@@ -1,5 +1,6 @@
-<?php
-namespace BPMBerekening\Afschrijvingsmethode;
+<?php namespace BPMBerekening\Afschrijvingsmethode;
+
+require_once( dirname(__FILE__) . '/IAfschrijvingsmethode.php' );
 
 /**
  * User: dsessink
@@ -24,7 +25,7 @@ class ForfaitaireTabel implements IAfschrijvingsmethode
      */
     public function setMotorrijtuig($motorrijtuig)
     {
-        if (!class_basename($motorrijtuig) == "Motorrijtuig") {
+        if (!is_a($motorrijtuig,  "Motorrijtuig")) {
             throw new Exception("Invalid Motorrijtuig given: " . class_basename($motorrijtuig));
         }
 
@@ -37,6 +38,11 @@ class ForfaitaireTabel implements IAfschrijvingsmethode
      */
     public function berekenAfschrijvingspercentage($datum_aangifte = null)
     {
+        if ( !isset($this->motorrijtuig) )
+        {
+            throw new Exception("Kan geen afschrijvingspercentage berekenen als er geen motorrijtuig bekend is.");
+        }
+
         $datum_eerste_tenaamstelling_nederland = $datum_aangifte; //new \DateTime("08-04-2012"); //new \DateTime("now");
         $datum_eerste_ingebruikname = $this->motorrijtuig->getDatumEersteIngebruikname();
 

@@ -1,6 +1,14 @@
 <?php
+error_reporting(E_ALL);
+ini_set("display_errors", true);
+
+require_once( dirname(__FILE__) . '/../models/BPMBerekening/BPMBerekening.php' );
+require_once( dirname(__FILE__) . '/../models/BPMBerekening/Afschrijvingsmethode/ForfaitaireTabel.php' );
+require_once( dirname(__FILE__) . '/../models/BPMBerekening/Motorrijtuig/BestelautoDiesel.php' );
+
 use BPMBerekening\BPMBerekening;
 use BPMBerekening\Afschrijvingsmethode\ForfaitaireTabel;
+use BPMBerekening\Motorrijtuig\BestelautoDiesel;
 
 /**
  * @info http://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/prive/auto_en_vervoer/belastingen_op_auto_en_motor/belasting_van_personenautos_en_motorrijwielen_bpm/waarover_bpm_berekenen/afschrijving_op_basis_van_koerslijst_taxatierapport_of_forfaitaire_tabel/afschrijving_op_basis_van_forfaitaire_tabel
@@ -9,8 +17,7 @@ use BPMBerekening\Afschrijvingsmethode\ForfaitaireTabel;
 class TestForfaitaireTabel extends PHPUnit_Framework_TestCase
 {
     // @rules
-    // 1. Voor een bestelauto geldt een afwijkende regeling. Het afschrijvingspercentage is na 5 jaar 100%.
-    // 2. Begint de periode op de laatste dag van een maand en eindigt deze op de laatste dag van een kortere maand? Dan is er toch sprake van een hele maand.
+    // Begint de periode op de laatste dag van een maand en eindigt deze op de laatste dag van een kortere maand? Dan is er toch sprake van een hele maand.
     // Voorbeeld:
     //
     // 31 januari tot en met 28 februari wordt gerekend als 1 maand
@@ -18,6 +25,19 @@ class TestForfaitaireTabel extends PHPUnit_Framework_TestCase
     public function testBpmBerekeningZonderWaardes()
     {
         // TODO
+    }
+
+    /**
+     * Voor een bestelauto geldt een afwijkende regeling. Het afschrijvingspercentage is na 5 jaar 100%.
+     */
+    public function testAfschrijvingspercentageBestelautoNa5jaar()
+    {
+        $motorrijtuig = new BestelautoDiesel();
+        $motorrijtuig->setDatumIngebruikname( new DateTime("2005-01-01") );
+
+        $forfaitairetabel = new ForfaitaireTabel();
+        $forfaitairetabel->setMotorrijtuig($motorrijtuig);
+        $this->assertEquals(100, $forfaitairetabel->berekenAfschrijvingspercentage( new DateTime("now") ));
     }
 
     /**
