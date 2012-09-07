@@ -46,6 +46,8 @@ class BpmBerekeningHistorisch
 //        ingebruikname in periode van 1 mei 2000 tot en met 30 juni 2001:
         elseif ($datum_eerste_ingebruikname >= 20000501 && $datum_eerste_ingebruikname <= 20010630) {
             \Laravel\Log::info("Historische BPM berekening regel: ingebruikname in periode van 1 mei 2000 tot en met 30 juni 2001");
+
+            $bpm_over_catalogusprijs = $this->berekenBpmOverCatalogusprijsMei2000tmJuni2001($motorrijtuig);
         } //        --- 3 ---
 //        ingebruikname in periode van 1 juli 2001 tot en met 31 december 2001:
         elseif ($datum_eerste_ingebruikname >= 20010701 && $datum_eerste_ingebruikname <= 20011231) {
@@ -144,6 +146,54 @@ class BpmBerekeningHistorisch
         }
 
         // TODO requirement 109: oude bpm tarieven elektro, waterstof, zeer zuinige personenauto, hybride => geen bpm
+
+        $bpm = floor(($motorrijtuig->getNettoCatalogusprijs() * $bpm_tarief / 100) - $brandstofkorting);
+
+        if ($bpm < 0) $bpm = 0;
+
+        return $bpm;
+    }
+
+    /**
+     * @param \BpmBerekening\Motorrijtuig\Motorrijtuig $motorrijtuig
+     */
+    public function berekenBpmOverCatalogusprijsMei2000tmJuni2001($motorrijtuig)
+    {
+        $brandstofkorting = 0;
+        $bpm_tarief = 0;
+
+        if (get_class($motorrijtuig) == "test\Motorrijtuig\PersonenautoGeenDiesel") {
+            $bpm_tarief = 45.2; // req 110
+            $brandstofkorting = 1540; // req 111
+        } elseif (get_class($motorrijtuig) == "test\Motorrijtuig\PersonenautoDiesel") {
+            $bpm_tarief = 45.2; // req 110
+            $brandstofkorting = -328; // req 112
+            // TODO of als voldoet aan grenswaarden 2005: verminder met 217EUR
+        }
+        elseif (get_class($motorrijtuig) == "test\Motorrijtuig\BestelautoGeenDiesel") {
+            // requirement 113: bestelauto met benzinemotor: geen bpm
+            return 0;
+        } elseif (get_class($motorrijtuig) == "test\Motorrijtuig\BestelautoDiesel") {
+            // requirement 114: bestelauto met dieselmotor: geen bpm
+            return 0;
+        }
+        elseif (get_class($motorrijtuig) == "test\Motorrijtuig\Motorfiets") {
+//            requirement 115: netto-catalogusprijs tot en met 2133 EUR: 10,2 % van netto-catalogusprijs
+//            requirement 116: netto-catalogusprijs vanaf 2134 EUR: 20,7% van netto-catalogusprijs
+//            requirement 117: netto-catalogusprijs vanaf 2134 EUR: verminder met 224 EUR
+            if ($motorrijtuig->getNettoCatalogusprijs() <= 2133) {
+                $bpm_tarief = 10.2;
+                $brandstofkorting = 0;
+            } else {
+                $bpm_tarief = 20.7;
+                $brandstofkorting = 224;
+            }
+        }
+        else
+        {
+            // TODO deze kan waarschijnlijk weg als alle requirements er in zitten.
+            return 0;
+        }
 
         $bpm = floor(($motorrijtuig->getNettoCatalogusprijs() * $bpm_tarief / 100) - $brandstofkorting);
 
