@@ -1,3 +1,27 @@
+engines:
+  phpcodesniffer:
+    enabled: true
+  phpmd:
+    enabled: true
+  eslint:
+    enabled: true
+  fixme:
+    enabled: true
+  csslint:
+    enabled: true
+  duplication:
+  	enabled: true
+    config:
+    	languages:
+      - php
+      	mass_threshold: 28
+      - javascript
+ratings:
+  paths:
+  - application/**
+  - bundles/**
+  - laravel/**
+  - web/**
 exclude_paths:
-- "bundles/"
-- "laravel/"
+  - "bundles/"
+  - "laravel/"
