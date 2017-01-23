@@ -10,9 +10,9 @@ engines:
   csslint:
     enabled: true
   duplication:
-  	enabled: true
+    enabled: true
     config:
-    	languages:
+      languages:
       - php
       	mass_threshold: 28
       - javascript
