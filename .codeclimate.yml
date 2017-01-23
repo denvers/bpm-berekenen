@@ -14,7 +14,7 @@ engines:
     config:
       languages:
       - php
-      	mass_threshold: 28
+        mass_threshold: 28
       - javascript
 ratings:
   paths:
